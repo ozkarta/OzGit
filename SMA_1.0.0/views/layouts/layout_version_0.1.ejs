@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= defaultPage.pageTitle%></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/logo-nav.css" rel="stylesheet">
+    
+    <script src="front_end_js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="front_end_js/bootstrap.min.js"></script>
+    
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img src="images/<%= logoName %>" alt="" >
+                </a>
+            </div>
+           
+             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                   <% menuItems.forEach(function(menu){ %>
+                        <li>
+                            <a href="/<%= menu.viewName %>"><%= menu.screenName %></a>
+                        </li>
+                   <%          }); %>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+
+
+            <!-- Language Chooser -->
+            
+            <form method="POST" action="/" id="chooserPoster"> 
+                      <select class="selectpicker" style=" position:absolute;right:5% ;top:30%" onchange="languageChooserSelectionChanged(this)">
+                    
+                              <% languageItems.forEach(function(item){  
+                                 if(item.languageSystemName==currentLanguage) {  %>
+
+                                        <option selected="true"><a href="#"><%= item.languageName %></a></option>
+
+                            <%       }  
+                                  else{ %>
+                                        <option><a href="#"><%= item.languageName %></a></option>
+                            <%      }
+                              
+                               });  console.log('gadaecemaaa '+currentLanguage) %>
+                    
+                   
+                        </select>
+                        <input type="hidden" id="language" name="language"></form>
+            </form>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+   
+    <%- body %>
+   
+
+
+                     
+   
+
+
+    <script>
+        $('.dropdown-toggle').dropdown()
+
+
+
+          function languageChooserSelectionChanged(the){
+            //alert(the.options[the.selectedIndex].value)
+            //alert(location.pathname)
+            document.getElementById('language').value=the.options[the.selectedIndex].value;
+            //location.href=location.pathname+'?language='+the.options[the.selectedIndex].value;
+            document.getElementById('chooserPoster').submit();
+          }
+
+   </script>
+</body>
+
+</html>

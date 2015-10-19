@@ -1,0 +1,17 @@
+<SMA>
+	<layout_name>layout_version_0.1.ejs</layout_name>
+	<header_name>header_version_0.1.ejs</header_name>
+	<footer_name>footer_version_0.1.ejs</footer_name>
+	<logo_name>customLogo.png</logo_name>
+	<languages>
+		<language>ქართული</language>
+		<language>English</language>
+		<language>ру́сский</language>
+		<language>Deutsche</language>
+	</languages>
+	<menus>
+		<menu_item>home</menu_item>
+		<menu_item>about</menu_item>
+		<menu_item>contact</menu_item>
+	</menus>
+</SMA>

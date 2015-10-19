@@ -1,0 +1,16 @@
+{
+  "name": "SMA_project",
+  "main": "server.js",
+  "version": "1.0.0",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.6.1",
+    "express-ejs-layouts":"~1.1.0",
+    "xml2js":"~0.4.12",
+    "body-parser":"~1.14.1",
+    "multer":"~1.0.6",
+    "mssql":"~2.3.1",
+    "utf8":"~2.1.1"
+  }
+}
+
