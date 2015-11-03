@@ -46,7 +46,17 @@
 	</default_page>
 
 	<user_specific>
+
+		
+
+
+
 		<client>
+			<layout_name>layout_version_0.1.ejs</layout_name>
+		    <header_name>header_version_0.1.ejs</header_name>
+		    <footer_name>footer_version_0.1.ejs</footer_name>
+		    <logo_name>customLogo.png</logo_name>
+
 			<sidebar>
 				<sidebar_item>
 					<screen_name></screen_name>
