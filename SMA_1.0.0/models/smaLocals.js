@@ -8,7 +8,7 @@ var smaLocals=function(){
 
 	this.menuItems=[];
 	this.languageItems=[];
-	this.defaultPage;
+	this.activePage;
 	this.selectedLanguage='georgian';
     //console.log('smaLocals constructor  was invoked')
 	smaLocals.prototype.locals=function(){
@@ -18,7 +18,7 @@ var smaLocals=function(){
 					'logoName': this.logoImageName,
 					'languageItems': this.languageItems,
 					'currentLanguage':this.selectedLanguage,
-					'defaultPage':this.defaultPage
+					'activePage':this.activePage
 					}
 				}
 		console.log("yleoba aris ----- "+toReturn.locals.currentLanguage);
@@ -48,7 +48,7 @@ var menuItem=function(screenName,pageTitle,viewName){
 
 }
 
-var defaultPageObject=function(pageTitle,viewName){
+var activePageObject=function(pageTitle,viewName){
 	this.pageTitle=pageTitle;
 	this.viewName=viewName;
 }
@@ -61,5 +61,5 @@ var languageObject=function(languageGUID,languageName,languageSystemName){
 
 module.exports.smaLocals=smaLocals;
 module.exports.menuItem=menuItem
-module.exports.defaultPageObject=defaultPageObject;
+module.exports.activePageObject=activePageObject;
 module.exports.languageObject=languageObject;

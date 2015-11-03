@@ -52,7 +52,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 
 		//   DEFAULT PAGe
 
-		smaLocals.defaultPage=new sma.defaultPageObject(smaLocals.configInJSON.SMA.default_page[0]['page_title'],
+		smaLocals.activePage=new sma.activePageObject(smaLocals.configInJSON.SMA.default_page[0]['page_title'],
 																smaLocals.configInJSON.SMA.default_page[0]['page_view_name']);
 
 
