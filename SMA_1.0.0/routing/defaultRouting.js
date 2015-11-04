@@ -10,10 +10,10 @@
 		console.log('the layout name is : '+smaLocals.default_layout_name);
 		console.log('the header name is : '+smaLocals.default_header_name);
 		console.log('the footer name is : '+smaLocals.default_footer_name);
-		for(var i=0;i<smaLocals.menuItems.length;i++){
-			console.log('menus  --->'+smaLocals.menuItems[i].screenName);
-			console.log('menus  --->'+smaLocals.menuItems[i].pageTitle);
-			console.log('menus  --->'+smaLocals.menuItems[i].viewName);
+		for(var i=0;i<smaLocals.activeUser.menuItems.length;i++){
+			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].screenName);
+			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].pageTitle);
+			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].viewName);
 
 		}
 
@@ -24,10 +24,14 @@
 
 		console.log('END DEBUG  ____ROUTINGS___')
 
+
+
+
+
+
+
+
 		defaultPost(app,smaLocals);
-
-
-
 
 		defaultGet(app,smaLocals);
 		
@@ -59,7 +63,7 @@
 		}
 		function trialGet(app,smaLocals){
 			
-			for(var pages in smaLocals.menuItems){
+			for(var pages in smaLocals.activeUser.menuItems){
 				console.log("the  pages  routed   are  :.....    "+smaLocals.menuItems[pages].viewName);
 				app.get('/'+smaLocals.menuItems[pages].viewName,function(req,res){
 					trialGetAll(req,res)
@@ -81,25 +85,14 @@
 						console.log('default page was requested  by GET')
 
 
-						res.render('pages/'+smaLocals.activePage.viewName,smaLocals.locals());
+						res.render('pages/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
 
 						}
 		var getWithDefaults=function(req,res){
 							console.log('default page was requested  by GET')
 							res.render()
 						}
-		var trialGetAll =function(req,res){
-								//for(var ind in smaLocals.menuItems){
-
-									//console.log(smaLocals.menuItems[ind].viewName+' VS '+req.originalUrl)
-									//if('/'+smaLocals.menuItems[ind].viewName===req.originalUrl){
-										
-										//return;
-									//}
-								//}
-								//
-
-									
+		var trialGetAll =function(req,res){								
 									res.render('pages'+req.originalUrl,smaLocals.locals(),function(err,html){
 										if(err){
 											console.log('1111111111');

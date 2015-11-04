@@ -1,4 +1,6 @@
-﻿<SMA>	
+<SMA>	
+
+	<!--DEFAULT  CONFIGURATION FOR ALL USERS-->
 	<layout_name>layout_version_0.1.ejs</layout_name>
 	<header_name>header_version_0.1.ejs</header_name>
 	<footer_name>footer_version_0.1.ejs</footer_name>
@@ -9,45 +11,61 @@
 		<language_variable>russian</language_variable>
 		<language_variable>german</language_variable>
 	</languages>
-	<menus>
-		<menu_item>
-			<screen_name>Home</screen_name>
-			<screen_page>
-				<page_title>SMA Home Page</page_title>
-				<page_view_name>index.ejs</page_view_name>
-			</screen_page>
-		</menu_item>
-		<menu_item>
-			<screen_name>About</screen_name>
-			<screen_page>
-				<page_title>SMA About Page</page_title>
-				<page_view_name>about.ejs</page_view_name>
-			</screen_page>
-		</menu_item>
-		<menu_item>
-			<screen_name>Contact</screen_name>
-			<screen_page>
-				<page_title>SMA Contact Page</page_title>
-				<page_view_name>contact.ejs</page_view_name>
-			</screen_page>
-		</menu_item>
-		<menu_item>
-			<screen_name>tESTER</screen_name>
-			<screen_page>
-				<page_title>SMA tESTER Page</page_title>
-				<page_view_name>tESTER.ejs</page_view_name>
-			</screen_page>
-		</menu_item>
-	</menus>
-	
-	<default_page>
-		<page_title>SMA Application by OzKart</page_title>
-		<page_view_name>index.ejs</page_view_name>
-	</default_page>
+
 
 	<user_specific>
 
-		<client>
+		<user>
+				<user_type>visitor</user_type>
+				<layout_name></layout_name>
+				<header_name></header_name>
+				<footer_name></footer_name>
+				<logo_name></logo_name>
+				<languages>
+					<language_variable>georgian</language_variable>
+					<language_variable>english</language_variable>
+					<language_variable>russian</language_variable>
+					<language_variable>german</language_variable>
+				</languages>
+				<menus>
+					<menu_item>
+						<screen_name>Home</screen_name>
+						<screen_page>
+							<page_title>SMA Home Page</page_title>
+							<page_view_name>index.ejs</page_view_name>
+						</screen_page>
+					</menu_item>
+					<menu_item>
+						<screen_name>About</screen_name>
+						<screen_page>
+							<page_title>SMA About Page</page_title>
+							<page_view_name>about.ejs</page_view_name>
+						</screen_page>
+					</menu_item>
+					<menu_item>
+						<screen_name>Contact</screen_name>
+						<screen_page>
+							<page_title>SMA Contact Page</page_title>
+							<page_view_name>contact.ejs</page_view_name>
+						</screen_page>
+					</menu_item>
+					<menu_item>
+						<screen_name>tESTER</screen_name>
+						<screen_page>
+							<page_title>SMA tESTER Page</page_title>
+							<page_view_name>tESTER.ejs</page_view_name>
+						</screen_page>
+					</menu_item>
+				</menus>
+				
+				<default_page>
+					<page_title>SMA Application by OzKart</page_title>
+					<page_view_name>index.ejs</page_view_name>
+				</default_page>
+
+		</user>
+		<user>
+			<user_type>client</user_type>
 			<layout_name></layout_name>
 		    <header_name></header_name>
 		    <footer_name></footer_name>
@@ -75,8 +93,9 @@
 				</sidebar_item>
 			</sidebar>
 			
-		</client>
-		<copmanyHR>
+		</user>
+		<user>
+			<user_type>companyHR</user_type>
 			<layout_name></layout_name>
 		    <header_name></header_name>
 		    <footer_name></footer_name>
@@ -104,8 +123,9 @@
 				</sidebar_item>
 			</sidebar>
 
-		</copmanyHR>
-		<companyManager>
+		</user>
+		<user>
+			<user_type>companyManager</user_type>
 			<layout_name></layout_name>
 		    <header_name></header_name>
 		    <footer_name></footer_name>
@@ -133,8 +153,9 @@
 				</sidebar_item>
 			</sidebar>
 
-		</companyManager>
-		<companyWorker>
+		</user>
+		<user>
+			<user_type>companyWorker</user_type>
 			<layout_name></layout_name>
 		    <header_name></header_name>
 		    <footer_name></footer_name>
@@ -162,8 +183,9 @@
 				</sidebar_item>
 			</sidebar>
 
-		</companyWorker>
-		<SMAadmin>
+		</user>
+		<user>
+			<user_type>SMAadmin</user_type>
 			<layout_name></layout_name>
 		    <header_name></header_name>
 		    <footer_name></footer_name>
@@ -191,13 +213,10 @@
 				</sidebar_item>
 			</sidebar>
 
-		</SMAadmin>
-		<SMAmanager>
-			<layout_name></layout_name>
-		    <header_name></header_name>
-		    <footer_name></footer_name>
-		    <logo_name></logo_name>
-
+		</user>
+		<user>
+			<user_type>SMAmanager</user_type>
+			
 
 		    <menus>
 				<menu_item>
@@ -220,7 +239,7 @@
 				</sidebar_item>
 			</sidebar>
 
-		</SMAmanager>
+		</user>
 
 	</user_specific>
 </SMA>
