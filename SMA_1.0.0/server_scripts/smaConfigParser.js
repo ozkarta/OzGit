@@ -5,17 +5,20 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 	this.k='ozKart';
 
     //----------------------------------------------------------------------------------
-	configReader.prototype.parseConfig=function (){
+	configReader.prototype.parseConfig=function (callback){
 	//var data=fs.readFileSync('./configurations/SMAconfig.0.01.XML','utf8');
 	var data=fs.readFileSync('./configurations/SMAconfig.0.02.XML','utf8');
 	
 	var parser=new xmlObject.Parser();
 	parser.parseString(data,function(err,result){
-					smaLocals.configInJSON=result;
-					//initLayoutVariables();
+						smaLocals.configInJSON=result;
+						//initLayoutVariables();
 
 
-					initLayoutVariablesTrial_version_02();
+						initLayoutVariablesTrial_version_02(function(){
+						callback();
+					});
+					
 				});
 
 	};
@@ -64,7 +67,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 	};
 	//-------------------------------------------------------------------------------------------
 
-	var initLayoutVariablesTrial_version_02=function(){
+	var initLayoutVariablesTrial_version_02=function(returner){
 		//  default page elements
 		smaLocals.default_layout_name=smaLocals.configInJSON.SMA.layout_name.toString();
 		smaLocals.default_header_name=smaLocals.configInJSON.SMA.header_name.toString();
@@ -112,26 +115,26 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 				var defaultPageObjectJSON=userObject.default_page;
 
 				//      CHECK   IF  VARIABLES ARE   ASSIGNED FOR USERS  OTHERWISE  TAKE THEM FROM DEFAULT   VERSION
-				if(userObject.layout_name != undefined){
+				if(userObject.layout_name != undefined & userObject.layout_name!=''){
 					layoutName=userObject.layout_name.toString();
 				}else{
-					layoutName=smaLocals.layoutName;
+					layoutName=smaLocals.default_layout_name;
 				}
 
-				if(userObject.header_name != undefined){
+				if(userObject.header_name != undefined & userObject.header_name!=''){
 					headerName=userObject.header_name.toString();
 				}else{
-					headerName=smaLocals.headerName;
+					headerName=smaLocals.default_header_name;
 				}
-				if(userObject.footer_name != undefined){
+				if(userObject.footer_name != undefined & userObject.footer_name!=''){
 					footerName=userObject.footer_name.toString();
 				}else{
-					footerName=smaLocals.footerName;
+					footerName=smaLocals.default_footer_name;
 				}
-				if(userObject.logo_name != undefined){
+				if(userObject.logo_name != undefined & userObject.logo_name!=''){
 					logoName=userObject.logo_name.toString();
 				}else{
-					logoName=smaLocals.logoName;
+					logoName=smaLocals.logoImageName;
 				}
 				
 				
@@ -196,7 +199,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 			
 
 		}
-
+		returner();
 
 	}
 

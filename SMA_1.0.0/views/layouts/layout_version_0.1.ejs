@@ -61,7 +61,7 @@
             <form method="POST" action="/" id="chooserPoster"> 
                       <select class="selectpicker" style=" position:absolute;right:5% ;top:30%" onchange="languageChooserSelectionChanged(this)">
                     
-                              <% languageItems.forEach(function(item){  console.log(item.languageName)
+                              <% console.dir(languageItems+'  __'+currentLanguage);   languageItems.forEach(function(item){  console.log('ozzz_- '+item.languageName)
                                  if(item.languageSystemName==currentLanguage) {  %>
 
                                         <option selected="true"><a href="#"><%= item.languageName %></a></option>

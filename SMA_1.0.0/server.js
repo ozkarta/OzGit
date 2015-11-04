@@ -20,6 +20,7 @@ var smaLocals=new sma.smaLocals();
 var dbConnector=new db.dbConnector(sql);
 var configReader=new configParser.configReader(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8);
 
+var registerRoutings=new serverRouter.registerRoutings(sma,smaLocals);
 
 
 app.use(bodyParser.json());
@@ -40,7 +41,11 @@ app.use(express.static(__dirname + '/public'));
 //____________________________FUNCTIONS________________________________________________
 function main(){
 	//console.log(configReader.k.toString())
-	configReader.parseConfig();
+	configReader.parseConfig(function(){
+		registerRoutings.register(app,smaLocals,function(){
+			setLayout(smaLocals.activeUser.layoutName);
+		});
+	});
 
 	//console.log('puny   ------   '+punyCode.toUnicode(''));
 
@@ -48,8 +53,8 @@ function main(){
 	//dbConnector.getGUIDWithValue('English');
 
 
-	serverRouter.registerRoutings(app,smaLocals);
-	setLayout(smaLocals.default_layout_name);
+	
+	
 };
 
 

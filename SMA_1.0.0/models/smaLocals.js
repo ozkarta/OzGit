@@ -17,6 +17,7 @@ var smaLocals=function(){
 
     
 	smaLocals.prototype.locals=function(){
+		console.dir(this.activeUser)
 		var toReturn={
 				locals: {
 					'menuItems' : this.activeUser.menuItems,
@@ -37,7 +38,7 @@ var smaLocals=function(){
 			if (this.activeUser.languageItems[langObject].languageName===languageNameProvided){
 			this.activeUser.selectedLanguage=this.activeUser.languageItems[langObject].languageSystemName;	
 			console.log(this.activeUser.languageItems[langObject].languageName+" VS "+languageNameProvided);
-			console.log('returned:)) with '+this.selectedLanguage)
+			console.log('returned:)) with '+this.activeUser.selectedLanguage)
 			callback();		
 			};
 		}

@@ -1,15 +1,15 @@
 	
-	var registerRoutings=function(app,smaLocals,locals){
+	var registerRoutings=function(app,smaLocals){
 
 
 
-
+		registerRoutings.prototype.register=function(app,smaLocals,callback){
 
 
 		console.log('BEGIN DEBUG  ____ROUTINGS___')
-		console.log('the layout name is : '+smaLocals.default_layout_name);
-		console.log('the header name is : '+smaLocals.default_header_name);
-		console.log('the footer name is : '+smaLocals.default_footer_name);
+		console.log('the layout name is : '+smaLocals.activeUser.layoutName);
+		console.log('the header name is : '+smaLocals.activeUser.headerName);
+		console.log('the footer name is : '+smaLocals.activeUser.footerName);
 		for(var i=0;i<smaLocals.activeUser.menuItems.length;i++){
 			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].screenName);
 			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].pageTitle);
@@ -18,8 +18,8 @@
 		}
 
 
-		for(var i=0;i<smaLocals.languageItems.length;i++){
-			console.log('languages --->'+smaLocals.languageItems[i].languageName+'---->'+smaLocals.languageItems[i].languageGUID);
+		for(var i=0;i<smaLocals.activeUser.languageItems.length;i++){
+			console.log('languages --->'+smaLocals.activeUser.languageItems[i].languageName+'---->'+smaLocals.languageItems[i].languageGUID);
 		}
 
 		console.log('END DEBUG  ____ROUTINGS___')
@@ -31,11 +31,19 @@
 
 
 
-		defaultPost(app,smaLocals);
+			defaultPost(app,smaLocals);
 
-		defaultGet(app,smaLocals);
+			defaultGet(app,smaLocals);
 		
-		trialGet(app,smaLocals);
+			trialGet(app,smaLocals);
+			callback();
+		}
+
+
+
+
+
+		
 
 
 
@@ -64,8 +72,8 @@
 		function trialGet(app,smaLocals){
 			
 			for(var pages in smaLocals.activeUser.menuItems){
-				console.log("the  pages  routed   are  :.....    "+smaLocals.menuItems[pages].viewName);
-				app.get('/'+smaLocals.menuItems[pages].viewName,function(req,res){
+				console.log("the  pages  routed   are  :.....    "+smaLocals.activeUser.menuItems[pages].viewName);
+				app.get('/'+smaLocals.activeUser.menuItems[pages].viewName,function(req,res){
 					trialGetAll(req,res)
 				});
 			}
@@ -108,7 +116,7 @@
 		var postIndex=function(req,res){
 						console.log('default page was requested  by  POST')
 						smaLocals.setSelectedLanguage(req.body.language,function(){
-							console.log('rendering with ....'+smaLocals.selectedLanguage);
+							console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
 							res.render('pages/'+smaLocals.activePage.viewName,smaLocals.locals());
 						});
 						
