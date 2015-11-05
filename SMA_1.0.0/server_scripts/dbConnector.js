@@ -95,6 +95,28 @@ dbConnector.prototype.getLnaguageDisplayName=function(languageSysName,callback){
 		 
 			});
 	}
+
+//_______________________________________________BLOCKING VERSION______________________________________________________________
+dbConnector.prototype.getLanguageGUID_blocking=function(languageSysName){
+
+	console.log('language GUID was requested');
+	var connection=new this.sql.Connection(this.connectionJson);
+	var request=new sql.Request(connection);
+	request.input('languageName', sql.VarChar, languageSysName);
+	request.execute('getLanguageGUID');
+	
+
+
+
+}
+
+
+dbConnector.prototype.getLnaguageDisplayName_blocking=function(languageSysName){
+	console.log('language  translation  was requested');
+}
+
+
+
 	
 };
 
