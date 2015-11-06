@@ -103,27 +103,24 @@ dbConnector.prototype.getLnaguageDisplayName=function(languageSysName,callback){
 			});
 	}
 
-//_______________________________________________BLOCKING VERSION______________________________________________________________
-dbConnector.prototype.getLanguageGUID_blocking=function(languageSysName){
 
-	console.log('language GUID was requested');
-	var connection=new this.sql.Connection(this.connectionJson);
-	var request=new sql.Request(connection);
-	request.input('languageName', sql.VarChar, languageSysName);
-	request.execute('getLanguageGUID');
-	
-
-
-
+dbConnector.prototype.getVariableTranslated=function(languageGUID,variableName,callback){
+	var connection=new this.sql.Connection(this.connectionJson,function(error){
+		var request=new sql.Request(connection);
+		request.input('languageGUID',sql.VarChar,languageGUID);
+		request.input('variableName',sql.VarChar,variableName);
+		request.execute('getTranslatedVariableValue',function(err,recordsets,returnValue){
+			if(recordsets!= undefined){
+				if(recordsets[0]!=undefined){
+					if(recordsets[0][0]!=undefined){
+						callback(recordsets[0][0].value.toString());
+					}
+				}
+			}
+			callback(undefined);
+		});
+	});
 }
-
-
-dbConnector.prototype.getLnaguageDisplayName_blocking=function(languageSysName){
-	console.log('language  translation  was requested');
-}
-
-
-
 	
 };
 

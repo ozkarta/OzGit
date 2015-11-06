@@ -1,3 +1,8 @@
+var db=require('./server_scripts/dbConnector');
+
+var dbConnector=new db.dbConnector(sql);
+var async=require('async');
+
 var smaLocals=function(){
 	this.configInJSON;
 
@@ -46,6 +51,13 @@ var smaLocals=function(){
 	}
 
 }
+	smaLocals.prototype.getTranslatedObject = function(ogj){
+	async.forEach(obj,function(item,callback){
+		
+	},function(err){
+
+	});
+}
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
 var menuItem=function(screenName,pageTitle,viewName){
 	this.screenName=screenName;
@@ -82,6 +94,7 @@ var userObject=function(isAuthenticated,userType,layoutName,headerName,footerNam
 
 	this.defaultPage=defaultPage;
 }
+
 
 
 //_________________________________________________________________________________________________________________
