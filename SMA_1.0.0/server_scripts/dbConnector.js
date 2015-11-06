@@ -14,6 +14,7 @@ var dbConnector=function(sql){
 
 
 	dbConnector.prototype.getLanguageList=function(){
+
 			var connection = new this.sql.Connection(this.connectionJson, function(err) {
 		    // ... error checks 
 		    //console.log(err.toString());
@@ -47,23 +48,29 @@ var dbConnector=function(sql){
 							       // return recordsets[0][0].languageGUID;
 							    }else{
 						    		console.log('broken  party!!!');
-						    		//return '';
+						    		callback(undefined,undefined);
 						    	}
 				        	}else{
 						    		console.log('broken  party!!!');
-						    		//return '';
+						    		callback(undefined,undefined);
 						    	}							       
 				    	}else{
 					    		console.log('broken  party!!!');
-					    		//return '';
+					    		callback(undefined,undefined);
 					    	}
 
 	    			});
 		 
 			});
+
+
 	}
 
 dbConnector.prototype.getLnaguageDisplayName=function(languageSysName,callback){
+	if(languageSysName==undefined){
+		callback(undefined,undefined);
+	}
+	console.log('Requested the  Display Name');
 	var connection = new this.sql.Connection(this.connectionJson, function(err) {
 		    	var request=new sql.Request(connection);
 				request.input('languageName', sql.VarChar, languageSysName);
@@ -80,15 +87,15 @@ dbConnector.prototype.getLnaguageDisplayName=function(languageSysName,callback){
 							       // return recordsets[0][0].languageDisplayName;
 							    }else{
 						    		console.log('broken  party!!!');
-						    		//return '';
+						    		callback(undefined,undefined);
 						    	}
 				        	}else{
 						    		console.log('broken  party!!!');
-						    		//return '';
+						    		callback(undefined,undefined);
 						    	}							       
 				    	}else{
 					    		console.log('broken  party!!!');
-					    		//return '';
+					    		callback(undefined,undefined);
 					    	}
 
 	    			});

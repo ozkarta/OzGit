@@ -21,7 +21,7 @@ var smaLocals=function(){
 		var toReturn={
 				locals: {
 					'menuItems' : this.activeUser.menuItems,
-					'logoName': this.activeUser.logoImageName,
+					'logoName': this.activeUser.logoName,
 					'languageItems': this.activeUser.languageItems,
 					'currentLanguage':this.activeUser.selectedLanguage,
 					'activePage':this.activeUser.defaultPage
