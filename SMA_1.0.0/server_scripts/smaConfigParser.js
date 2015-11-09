@@ -141,11 +141,12 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 											console.log('language  for users  are  initiated  and  called back ')
 											console.log(languageObject);
 											initMenu(menusObjectJSON,menusObject,function(){
-
+											console.dir(menusObject);
 											initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
-												console.log('after object is ...,.,..,,,')
+												//console.log('after object is ...,.,..,,,')
 												defaultPageObject=obj;
-											    console.dir(defaultPageObject);
+												smaLocals.activePage=defaultPageObject;
+											    //console.dir(defaultPageObject);
 											
 												//define  default active user
 												if(userType=='visitor'){
@@ -171,9 +172,10 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 									initMenu(menusObjectJSON,menusObject,function(){
 
 										initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
-											console.log('after object is ...,.,..,,,');
+											//console.log('after object is ...,.,..,,,');
 											defaultPageObject=obj;
-										    console.dir(defaultPageObject);
+											smaLocals.activePage=defaultPageObject;
+										    //console.dir(defaultPageObject);
 										
 											//define  default active user
 											if(userType=='visitor'){
@@ -199,7 +201,10 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 							callback1();
 						});
 				},function(err){
-					returner();
+					//   TRANSLATE ACTIVE
+					//smaLocals.translateActiveUser(function(){
+						returner();
+					//})
 				});
 			});
 		});

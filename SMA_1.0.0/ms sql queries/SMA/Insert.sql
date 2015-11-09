@@ -18,17 +18,30 @@ insert into variables(languageGUID,variableGUID,variableName,value)
 
 values  ------------------------------------------
 		--			DEFAULT
-		-------------------------------------------
+		--------------ENG-----------------------------
 		(@en,newid(),'home','Home'),
+		(@en,newid(),'homeTitle','SMA  Home Page Title'),
+
 		(@en,newid(),'about','About'),
+		(@en,newid(),'aboutTitle','About page title'),
+
 		(@en,newid(),'contact','Contact'),
+		(@en,newid(),'contactTitle','Contact page title'),
+
 		(@en,newid(),'login','Log In'),
 		(@en,newid(),'register','Register'),
 
+		-----------------GEO----------------------------
 		
 		(@ge,newid(),'home',N'სახლი'),
+		(@ge,newid(),'homeTitle',N'SMA სახლი'),
+
 		(@ge,newid(),'about',N'ჩვენს შესახებ'),
+		(@ge,newid(),'aboutTitle',N'კომპანიის შესახებ'),
+
 		(@ge,newid(),'contact',N'საკონტაქტო ინფორმაცია'),
+		(@ge,newid(),'contactTitle',N'ჩვენი საკონტაქტო ინფორმაცია'),
+
 		(@ge,newid(),'login',N'სისტემაში შესვლა'),
 		(@ge,newid(),'register',N'რეგისტრაცია'),
 		-----------------------------------------------------------

@@ -1,9 +1,7 @@
-var db=require('./server_scripts/dbConnector');
 
-var dbConnector=new db.dbConnector(sql);
 var async=require('async');
 
-var smaLocals=function(){
+var smaLocals=function(db){
 	this.configInJSON;
 
 	this.default_layout_name;
@@ -19,17 +17,34 @@ var smaLocals=function(){
 
 	this.smaUsers=[];
 
-
+	this.activePage;
     
+
+	smaLocals.prototype.setActivePage=function(viewName){
+		console.log('Activator  function')
+		console.dir(this.activeUser.menuItems);
+		for(var view in this.activeUser.menuItems){
+			console.log('opa1')
+			console.log(viewName +'VS'+ '/'+this.activeUser.menuItems[view].viewName)
+
+
+			if (viewName == '/'+this.activeUser.menuItems[view].viewName){
+
+				this.activePage=this.activeUser.menuItems[view];
+			}
+		}
+	}
+
+
 	smaLocals.prototype.locals=function(){
-		console.dir(this.activeUser)
+		//console.dir(this.activeUser)
 		var toReturn={
 				locals: {
 					'menuItems' : this.activeUser.menuItems,
 					'logoName': this.activeUser.logoName,
 					'languageItems': this.activeUser.languageItems,
 					'currentLanguage':this.activeUser.selectedLanguage,
-					'activePage':this.activeUser.defaultPage
+					'activePage':this.activePage
 					}
 				}
 		console.log("yleoba aris ----- "+toReturn.locals.currentLanguage);
@@ -50,14 +65,41 @@ var smaLocals=function(){
 		
 	}
 
-}
-	smaLocals.prototype.getTranslatedObject = function(ogj){
-	async.forEach(obj,function(item,callback){
-		
-	},function(err){
 
-	});
+
+	smaLocals.prototype.translateActiveUser = function(callback){
+
+
+
+		var activeLanguageGUID='';
+		for(var lang in this.activeUser.languageItems){
+				if(this.activeUser.languageItems[lang].languageSystemName==this.activeUser.selectedLanguage){
+					activeLanguageGUID=this.activeUser.languageItems[lang].languageSystemName;
+				}
+		}
+
+
+
+		console.log('______________________TRANSLATING______________________________');
+		console.dir(this.activeUser.menuItems);
+
+
+		async.forEach(this.activeUser.menuItems,function(item1,callback){
+			db.getVariableTranslated(activeLanguageGUID,item1.screenName,function(val){
+				item1.screenName=val;
+				db.getVariableTranslated(activeLanguageGUID,item1.pageTitle,function(val2){
+					item1.pageTitle=val2;
+				});
+			});
+			callback();
+		},function(err){
+			callback();
+		});
+
+		
+	}
 }
+	
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
 var menuItem=function(screenName,pageTitle,viewName){
 	this.screenName=screenName;

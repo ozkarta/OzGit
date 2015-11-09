@@ -91,16 +91,19 @@
 
 		var getIndex=function(req,res){
 						console.log('default page was requested  by GET')
-
+						smaLocals.setActivePage(req.originalUrl);
 
 						res.render('pages/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
 
 						}
 		var getWithDefaults=function(req,res){
 							console.log('default page was requested  by GET')
+							smaLocals.setActivePage(req.originalUrl);
 							res.render()
 						}
-		var trialGetAll =function(req,res){								
+		var trialGetAll =function(req,res){
+									console.log('_____________________________activating..............  '+req.originalUrl);
+									smaLocals.setActivePage(req.originalUrl);								
 									res.render('pages'+req.originalUrl,smaLocals.locals(),function(err,html){
 										if(err){
 											console.log('1111111111');

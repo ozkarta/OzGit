@@ -16,8 +16,9 @@ var sql=require('mssql');
 var db=require('./server_scripts/dbConnector');
 
 
-var smaLocals=new sma.smaLocals();
+
 var dbConnector=new db.dbConnector(sql);
+var smaLocals=new sma.smaLocals(dbConnector);
 var configReader=new configParser.configReader(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8);
 
 var registerRoutings=new serverRouter.registerRoutings(sma,smaLocals);
