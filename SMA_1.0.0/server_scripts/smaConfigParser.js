@@ -202,9 +202,9 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 						});
 				},function(err){
 					//   TRANSLATE ACTIVE
-					//smaLocals.translateActiveUser(function(){
+					smaLocals.translateActiveUser(function(){
 						returner();
-					//})
+					})
 				});
 			});
 		});

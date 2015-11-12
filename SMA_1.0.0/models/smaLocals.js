@@ -56,10 +56,14 @@ var smaLocals=function(db){
 		for(var langObject in this.activeUser.languageItems){
 			//console.log(this.languageItems[langObject].languageName+" VS "+languageNameProvided);
 			if (this.activeUser.languageItems[langObject].languageName===languageNameProvided){
-			this.activeUser.selectedLanguage=this.activeUser.languageItems[langObject].languageSystemName;	
-			console.log(this.activeUser.languageItems[langObject].languageName+" VS "+languageNameProvided);
-			console.log('returned:)) with '+this.activeUser.selectedLanguage)
-			callback();		
+				this.activeUser.selectedLanguage=this.activeUser.languageItems[langObject].languageSystemName;	
+				console.log(this.activeUser.languageItems[langObject].languageName+" VS "+languageNameProvided);
+				console.log('returned:)) with '+this.activeUser.selectedLanguage);
+				this.translateActiveUser(function(){
+					console.log('-------------------------------------translation----  calling back')
+					callback();		
+				});
+				break;
 			};
 		}
 		
@@ -74,7 +78,7 @@ var smaLocals=function(db){
 		var activeLanguageGUID='';
 		for(var lang in this.activeUser.languageItems){
 				if(this.activeUser.languageItems[lang].languageSystemName==this.activeUser.selectedLanguage){
-					activeLanguageGUID=this.activeUser.languageItems[lang].languageSystemName;
+					activeLanguageGUID=this.activeUser.languageItems[lang].languageGUID;
 				}
 		}
 
@@ -84,14 +88,21 @@ var smaLocals=function(db){
 		console.dir(this.activeUser.menuItems);
 
 
-		async.forEach(this.activeUser.menuItems,function(item1,callback){
-			db.getVariableTranslated(activeLanguageGUID,item1.screenName,function(val){
-				item1.screenName=val;
+		async.forEach(this.activeUser.menuItems,function(item1,callback1){
+			db.getVariableTranslated(activeLanguageGUID,item1.systemName,function(val){
+				if(val != undefined){
+					item1.screenName=val;
+				}
+				
+				console.log('item 1  is ---->  '+val)
 				db.getVariableTranslated(activeLanguageGUID,item1.pageTitle,function(val2){
-					item1.pageTitle=val2;
+					if(val2!=undefined){
+						item1.pageTitle=val2;
+					}					
 				});
+				callback1();
 			});
-			callback();
+			
 		},function(err){
 			callback();
 		});
@@ -103,6 +114,7 @@ var smaLocals=function(db){
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
 var menuItem=function(screenName,pageTitle,viewName){
 	this.screenName=screenName;
+	this.systemName=screenName;
 	this.pageTitle=pageTitle;
 	this.viewName=viewName;
 

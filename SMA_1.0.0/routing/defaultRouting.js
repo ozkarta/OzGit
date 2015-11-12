@@ -120,7 +120,14 @@
 						console.log('default page was requested  by  POST')
 						smaLocals.setSelectedLanguage(req.body.language,function(){
 							console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
-							res.render('pages/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
+							res.render('pages/'+smaLocals.activePage.viewName,smaLocals.locals(),function(err,html){
+								if(err){
+									console.log('1111111111');
+									res.redirect(404,'pages/error.ejs',smaLocals.locals())
+								}else{
+									res.send(html);
+								}
+							});
 						});
 						
 					}
