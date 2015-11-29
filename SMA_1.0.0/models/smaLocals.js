@@ -35,7 +35,6 @@ var smaLocals=function(db){
 		}
 	}
 
-
 	smaLocals.prototype.locals=function(){
 		//console.dir(this.activeUser)
 		var toReturn={
@@ -51,6 +50,7 @@ var smaLocals=function(db){
 
 		return  toReturn;
 	}
+
 	smaLocals.prototype.setSelectedLanguage=function(languageNameProvided,callback){
 	
 		for(var langObject in this.activeUser.languageItems){
@@ -69,12 +69,10 @@ var smaLocals=function(db){
 		
 	}
 
-
-
 	smaLocals.prototype.translateActiveUser = function(callback){
 
 
-
+		//  find active language GUID
 		var activeLanguageGUID='';
 		for(var lang in this.activeUser.languageItems){
 				if(this.activeUser.languageItems[lang].languageSystemName==this.activeUser.selectedLanguage){
@@ -84,17 +82,17 @@ var smaLocals=function(db){
 
 
 
-		console.log('______________________TRANSLATING______________________________');
-		console.dir(this.activeUser.menuItems);
+		//console.log('______________________TRANSLATING______________________________');
+		//console.dir(this.activeUser.menuItems);
 
-
+		console.log('began  translation ......')
 		async.forEach(this.activeUser.menuItems,function(item1,callback1){
 			db.getVariableTranslated(activeLanguageGUID,item1.systemName,function(val){
 				if(val != undefined){
 					item1.screenName=val;
 				}
 				
-				console.log('item 1  is ---->  '+val)
+				//console.log('item 1  is ---->  '+val)
 				db.getVariableTranslated(activeLanguageGUID,item1.pageTitle,function(val2){
 					if(val2!=undefined){
 						item1.pageTitle=val2;
@@ -104,9 +102,9 @@ var smaLocals=function(db){
 			});
 			
 		},function(err){
+			console.log('translation  was complete');
 			callback();
 		});
-
 		
 	}
 }
