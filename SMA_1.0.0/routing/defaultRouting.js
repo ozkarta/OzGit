@@ -70,10 +70,11 @@
 
 		}
 		function trialGet(app,smaLocals){
-			
-			for(var pages in smaLocals.activeUser.menuItems){
-				console.log("the  pages  routed   are  :.....    "+smaLocals.activeUser.menuItems[pages].viewName);
-				app.get('/'+smaLocals.activeUser.menuItems[pages].viewName,function(req,res){
+			var allArr=smaLocals.activeUser.menuItems.concat(smaLocals.activeUser.additionalMenuItems);
+			console.dir(allArr)
+			for(var pages in allArr){
+				console.log("the  pages  routed   are  :.....    "+allArr[pages].viewName);
+				app.get('/'+allArr[pages].viewName,function(req,res){
 					trialGetAll(req,res)
 				});
 			}

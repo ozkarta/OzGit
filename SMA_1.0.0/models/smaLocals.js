@@ -17,7 +17,7 @@ var smaLocals=function(db){
 
 	this.smaUsers=[];
 
-	this.activePage;
+	this.activePage; 
     
 
 	smaLocals.prototype.setActivePage=function(viewName){
@@ -40,6 +40,7 @@ var smaLocals=function(db){
 		var toReturn={
 				locals: {
 					'menuItems' : this.activeUser.menuItems,
+					'additionalMenuItems': this.activeUser.additionalMenuItems,
 					'logoName': this.activeUser.logoName,
 					'languageItems': this.activeUser.languageItems,
 					'currentLanguage':this.activeUser.selectedLanguage,
@@ -129,7 +130,7 @@ var languageObject=function(languageGUID,languageName,languageSystemName){
 	this.languageSystemName=languageSystemName;
 }
 
-var userObject=function(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageItems,menuItems,defaultPage){
+var userObject=function(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageItems,menuItems,additionalMenuItems,defaultPage){
 	this.isAuthenticated=isAuthenticated;
 
 
@@ -143,7 +144,7 @@ var userObject=function(isAuthenticated,userType,layoutName,headerName,footerNam
 	this.selectedLanguage='georgian';
 
 	this.menuItems=menuItems;
-
+	this.additionalMenuItems=additionalMenuItems;
 	this.defaultPage=defaultPage;
 }
 

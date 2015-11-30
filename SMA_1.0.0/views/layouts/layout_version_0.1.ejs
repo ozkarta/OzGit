@@ -43,7 +43,7 @@
                     <img src="images/<%= logoName %>" alt="" >
                 </a>
             </div>
-           
+            
              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                    <% menuItems.forEach(function(menu){ %>
@@ -56,9 +56,19 @@
             <!-- /.navbar-collapse -->
 
 
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"  style=" position:absolute;right:15% ;top:0%">
+                            <ul class="nav navbar-nav">
+                               <% additionalMenuItems.forEach(function(menu){ %>
+                                    <li>
+                                        <a href="/<%= menu.viewName %>"><%= menu.screenName %></a>
+                                    </li>
+                               <%          }); %>
+                            </ul>
+            </div>
+
             <!-- Language Chooser -->
-            
             <form method="POST" action="/" id="chooserPoster"> 
+                      
                       <select class="selectpicker" style=" position:absolute;right:5% ;top:30%" onchange="languageChooserSelectionChanged(this)">
                     
                               <% console.dir(languageItems+'  __'+currentLanguage);   languageItems.forEach(function(item){  console.log('ozzz_- '+item.languageName)

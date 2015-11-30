@@ -56,11 +56,14 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 
 								var languageObject=[];
 								var menusObject=[];
+								var additionalMenusObject=[];
 								var defaultPageObject;
 								//___________________________JSONS_____________________________________________
 								var languageObjectJSON=user.languages;
 								var menusObjectJSON=user.menus;
 								var defaultPageObjectJSON=user.default_page;
+								var additionalMenuObjectJSON=user.additional_menu;
+
 								//      CHECK   IF  VARIABLES ARE   ASSIGNED FOR USERS  OTHERWISE  TAKE THEM FROM DEFAULT   VERSION
 								if(user.layout_name != undefined & user.layout_name!=''){
 									layoutName=user.layout_name.toString();
@@ -92,58 +95,61 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 									initUsersLanguages(user.languages[0],languageObject,function(){
 											console.log('language  for users  are  initiated  and  called back ');
 											initMenu(menusObjectJSON,menusObject,function(){
+												initAdditionalMenu(additionalMenuObjectJSON,additionalMenusObject,function(){
+													initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
+														//console.log('after object is ...,.,..,,,')
+														defaultPageObject=obj;
+														smaLocals.activePage=defaultPageObject;
+													    //console.dir(defaultPageObject);
+													
+														//define  default active user
+														if(userType=='visitor'){
+															isAuthenticated=true;
+														}
 
-												initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
-													//console.log('after object is ...,.,..,,,')
-													defaultPageObject=obj;
-													smaLocals.activePage=defaultPageObject;
-												    //console.dir(defaultPageObject);
-												
-													//define  default active user
-													if(userType=='visitor'){
-														isAuthenticated=true;
-													}
 
+														//     PUSH  NEW  USERS   to    smaLocal
+														var user=new sma.userObject(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageObject,menusObject,additionalMenusObject,defaultPageObject);
 
-													//     PUSH  NEW  USERS   to    smaLocal
-													var user=new sma.userObject(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageObject,menusObject,defaultPageObject);
-
-													smaLocals.smaUsers.push(user);
-													if(isAuthenticated){
-														smaLocals.activeUser=user;
-													}
-													callback2();
+														smaLocals.smaUsers.push(user);
+														if(isAuthenticated){
+															smaLocals.activeUser=user;
+														}
+														callback2();
+													});
 												});
 											});
+												
 									});
 								}else{
 									console.log('there  was  no   language  found for the user.')
 									console.log('applying default value.....');
 									languageObject=smaLocals.languageItems;
 									initMenu(menusObjectJSON,menusObject,function(){
+										initAdditionalMenu(additionalMenuObjectJSON,additionalMenusObject,function(){
+											initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
+												//console.log('after object is ...,.,..,,,');
+												defaultPageObject=obj;
+												smaLocals.activePage=defaultPageObject;
+											    //console.dir(defaultPageObject);
+											
+												//define  default active user
+												if(userType=='visitor'){
+													isAuthenticated=true;
+												}
 
-										initDefaultPage(defaultPageObjectJSON,defaultPageObject,function(obj){
-											//console.log('after object is ...,.,..,,,');
-											defaultPageObject=obj;
-											smaLocals.activePage=defaultPageObject;
-										    //console.dir(defaultPageObject);
-										
-											//define  default active user
-											if(userType=='visitor'){
-												isAuthenticated=true;
-											}
 
+												//     PUSH  NEW  USERS   to    smaLocal
+												var user=new sma.userObject(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageObject,menusObject,additionalMenusObject,defaultPageObject);
 
-											//     PUSH  NEW  USERS   to    smaLocal
-											var user=new sma.userObject(isAuthenticated,userType,layoutName,headerName,footerName,logoName,languageObject,menusObject,defaultPageObject);
-
-											smaLocals.smaUsers.push(user);
-											if(isAuthenticated){
-												smaLocals.activeUser=user;
-											}
-											callback2();
+												smaLocals.smaUsers.push(user);
+												if(isAuthenticated){
+													smaLocals.activeUser=user;
+												}
+												callback2();
+												});
+											});
 										});
-									});
 								}
 								
 
@@ -255,7 +261,19 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 		console.log('default page is calling  back')
 		call6(defaultPageObject);
 	}
-	
+	var initAdditionalMenu=function(additionalMenuObjectJSON,additionalMenuObject,callback){
+		if(additionalMenuObjectJSON != undefined){
+					for(var menu_item in additionalMenuObjectJSON[0]['menu_item']){
+						//smaLocals.menuItems.push(smaLocals.configInJSON.SMA.menus[0]['menu_item'][menu_item]);
+						additionalMenuObject.push(new sma.menuItem(additionalMenuObjectJSON[0]['menu_item'][menu_item].screen_name,
+																  additionalMenuObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_title,
+																  additionalMenuObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_view_name
+							));
+						console.log('additional menues  pushed');
+					}
+				}
+		callback();
+	}
 	
 	
 
