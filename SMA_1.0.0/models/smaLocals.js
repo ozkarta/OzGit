@@ -146,6 +146,16 @@ var userObject=function(isAuthenticated,userType,layoutName,headerName,footerNam
 	this.menuItems=menuItems;
 	this.additionalMenuItems=additionalMenuItems;
 	this.defaultPage=defaultPage;
+
+	this.userInSession;
+}
+
+var userSession=function(guid,email,password,userRole){
+	
+	this.guid=guid;
+	this.email=email;
+	this.passpord=password;
+	this.userRole=userRole;
 }
 
 
@@ -157,3 +167,4 @@ module.exports.menuItem=menuItem
 module.exports.defaultPageObject=defaultPageObject;
 module.exports.languageObject=languageObject;
 module.exports.userObject=userObject;
+module.exports.userSession=userSession;

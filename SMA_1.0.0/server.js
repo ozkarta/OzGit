@@ -6,22 +6,31 @@ var fs=require('fs');
 var xmlObject=require('xml2js');
 var multer = require('multer');
 var bodyParser = require('body-parser');
-
 var utf8=require('utf8');
-
 var serverRouter=require('./routing/defaultRouting.js');
 var sma=require('./models/smaLocals.js');
 var configParser=require('./server_scripts/smaConfigParser.js');
 var sql=require('mssql');
 var db=require('./server_scripts/dbConnector');
-
-
-
 var dbConnector=new db.dbConnector(sql);
 var smaLocals=new sma.smaLocals(dbConnector);
 var configReader=new configParser.configReader(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8);
 
-var registerRoutings=new serverRouter.registerRoutings(sma,smaLocals);
+
+var morgan  = require('morgan');
+var passport=require('passport');
+var flash=require('connect-flash');
+var cookieParser=require('cookie-parser');
+var session=require('express-session');
+
+var registerRoutings=new serverRouter.registerRoutings(sma,smaLocals,passport);
+
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(session({secret:'ozkart_sma'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
 app.use(bodyParser.json());
@@ -44,7 +53,9 @@ function main(){
 	//console.log(configReader.k.toString())
 	configReader.parseConfig(function(){
 		registerRoutings.register(app,smaLocals,function(){
+			//console.dir(smaLocals);
 			setLayout(smaLocals.activeUser.layoutName);
+			require('./server_scripts/authentication.js')(passport,smaLocals);
 		});
 	});
 

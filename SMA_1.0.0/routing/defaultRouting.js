@@ -1,5 +1,5 @@
 	
-	var registerRoutings=function(app,smaLocals){
+	var registerRoutings=function(app,smaLocals,passport){
 
 
 
@@ -25,7 +25,11 @@
 		console.log('END DEBUG  ____ROUTINGS___')
 
 
-
+			app.post('/login', passport.authenticate('local-login', {
+		        successRedirect : '/', // redirect to the secure profile section
+		        failureRedirect : '/error.ejs', // redirect back to the signup page if there is an error
+		        failureFlash : true // allow flash messages
+		    }));
 
 
 
