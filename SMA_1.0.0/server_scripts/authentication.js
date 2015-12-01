@@ -1,20 +1,21 @@
 var localStrategy=require('passport-local').Strategy;
+var ozkartUser;
 
-  module.exports=function(passport,sma){
+  module.exports=function(passport,sma,smaLocals){
 
   	passport.serializeUser(function(user, done) {
-	  done(null, user.id);
+	  done(null, user.guid);
 	});
 
-	passport.deserializeUser(function(id, done) {
-	  User.findById(id, function(err, user) {
-	    done(err, user);
-	  });
+	passport.deserializeUser(function(guid, done) {
+	  //User.findById(id, function(err, user) {
+	    //done(err, user);
+	  //});
+	done(null,ozkartUser.guid)
 	});
 
 
-	console.log('__________this  is  the   authentication_______________')
-	console.dir(sma);
+	
 
 
   	passport.use('local-login',new localStrategy({
@@ -27,10 +28,10 @@ var localStrategy=require('passport-local').Strategy;
   		console.log(password+'   password');
   		if(email=='ozbegi'){
   				if(password=='12qwert12'){
-  					
-  					var user=new sma.userSession('GUID',email,password,'client');
-  					sma.activeUser.userInSession=user;
-  					return done(null,user);
+  					//var k=new sma.userSession('GUID','ozbegi','12qwert12','client');
+  					ozkartUser=new sma.userSession('GUID',email,password,'client');
+  					smaLocals.activeUser.userInSession=ozkartUser;
+  					return done(null,ozkartUser);
   				}else{
   					return  done(null,false);
   				}

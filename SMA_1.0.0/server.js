@@ -55,7 +55,8 @@ function main(){
 		registerRoutings.register(app,smaLocals,function(){
 			//console.dir(smaLocals);
 			setLayout(smaLocals.activeUser.layoutName);
-			require('./server_scripts/authentication.js')(passport,smaLocals);
+
+			require('./server_scripts/authentication.js')(passport,sma,smaLocals);
 		});
 	});
 
