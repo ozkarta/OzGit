@@ -201,25 +201,25 @@ go
 declare @counter as integer
 set @counter=1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'visitor',@counter)
+	values(newid(),'VISITOR',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'Client',@counter)
+	values(newid(),'CLIENT',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'CompanyWorker',@counter)
+	values(newid(),'COMPANYWORKER',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'CompanyHR',@counter)
+	values(newid(),'COMPANYHR',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'CompanyManager',@counter)
+	values(newid(),'COMPANYMANAGER',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'SMAAdministrator',@counter)
+	values(newid(),'SMAADMINISTRATOR',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'SMAManager',@counter)
+	values(newid(),'SMAMANAGER',@counter)
 	set @counter=@counter+1
 
 go
@@ -227,25 +227,25 @@ go
 
 
 
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='visitor'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaVisitor','ozbegi','kartvelishvili','',getdate() 
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='Client'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaClient','ozbegi','kartvelishvili','',getdate() 
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyWorker'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaWorker','ozbegi','kartvelishvili','',getdate()
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyHR'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCHR','ozbegi','kartvelishvili','',getdate()
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCManager','ozbegi','kartvelishvili','',getdate() 
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAAdministrator'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAAdmin','ozbegi','kartvelishvili','',getdate() 
-go
-insert into usersGeneral
-select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAManager','ozbegi','kartvelishvili','',getdate() 
-go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='visitor'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaVisitor','ozbegi','kartvelishvili','',getdate() 
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='Client'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaClient','ozbegi','kartvelishvili','',getdate() 
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyWorker'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaWorker','ozbegi','kartvelishvili','',getdate()
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyHR'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCHR','ozbegi','kartvelishvili','',getdate()
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCManager','ozbegi','kartvelishvili','',getdate() 
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAAdministrator'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAAdmin','ozbegi','kartvelishvili','',getdate() 
+--go
+--insert into usersGeneral
+--select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAManager','ozbegi','kartvelishvili','',getdate() 
+--go
 
