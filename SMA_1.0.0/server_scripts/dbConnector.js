@@ -110,9 +110,9 @@ dbConnector.prototype.getVariableTranslated=function(languageGUID,variableName,c
 		request.input('languageGUID',sql.VarChar,languageGUID);
 		request.input('variableName',sql.VarChar,variableName);
 		request.execute('getTranslatedVariableValue',function(err,recordsets,returnValue){
-			console.log('translation..............');
-			console.log('getTranslatedVariableValue '+languageGUID+'  ,  '+variableName)
-			console.dir(recordsets);
+			//console.log('translation..............');
+			//console.log('getTranslatedVariableValue '+languageGUID+'  ,  '+variableName)
+			//console.dir(recordsets);
 			if(recordsets!= undefined){
 				if(recordsets[0]!=undefined){
 					if(recordsets[0][0]!=undefined){

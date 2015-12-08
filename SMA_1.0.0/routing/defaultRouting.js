@@ -25,11 +25,7 @@
 		console.log('END DEBUG  ____ROUTINGS___')
 
 
-			app.post('/login', passport.authenticate('local-login', {
-		        successRedirect : '/', // redirect to the secure profile section
-		        failureRedirect : '/error.ejs', // redirect back to the signup page if there is an error
-		        failureFlash : true // allow flash messages
-		    }));
+			
 
 
 
@@ -61,7 +57,15 @@
 			});
 			app.post('/about.ejs',function(req,res){
 
-			})
+			});
+
+			app.post('/login', passport.authenticate('local-login', {
+		        successRedirect : '/', // redirect to the secure profile section
+		        failureRedirect : '/error.ejs', // redirect back to the signup page if there is an error
+		        failureFlash : true // allow flash messages
+		    }));
+
+		    
 		}
 		function defaultGet(app,smaLocals){
 			app.get('/',function(req,res){
@@ -122,12 +126,12 @@
 							};
 		//_________________________________POST_________________________________________________________
 		var postIndex=function(req,res){
-						console.log('default page was requested  by  POST')
+						console.log('page was requested  by  POST')
 						smaLocals.setSelectedLanguage(req.body.language,function(){
 							console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
 							res.render('pages/'+smaLocals.activePage.viewName,smaLocals.locals(),function(err,html){
 								if(err){
-									console.log('1111111111');
+									console.log('Error  while  rendering page ....');
 									res.redirect(404,'pages/error.ejs',smaLocals.locals())
 								}else{
 									res.send(html);

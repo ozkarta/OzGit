@@ -21,16 +21,18 @@ var smaLocals=function(db){
     
 
 	smaLocals.prototype.setActivePage=function(viewName){
-		console.log('Activator  function')
-		console.dir(this.activeUser.menuItems);
-		for(var view in this.activeUser.menuItems){
-			console.log('opa1')
-			console.log(viewName +'VS'+ '/'+this.activeUser.menuItems[view].viewName)
+		console.log('Setting active page')
+		
+		var k=this.activeUser.menuItems.concat(this.activeUser.additionalMenuItems);
+		console.dir(k);
+		for(var view in k){
+			//console.log('opa1')
+			console.log(viewName +'VS'+ '/'+k[view].viewName)
 
 
-			if (viewName == '/'+this.activeUser.menuItems[view].viewName){
+			if (viewName == '/'+k[view].viewName){
 
-				this.activePage=this.activeUser.menuItems[view];
+				this.activePage=k[view];
 			}
 		}
 	}
@@ -87,6 +89,7 @@ var smaLocals=function(db){
 		//console.dir(this.activeUser.menuItems);
 
 		console.log('began  translation ......')
+		///    TRANSLATE MENUITEM
 		async.forEach(this.activeUser.menuItems,function(item1,callback1){
 			db.getVariableTranslated(activeLanguageGUID,item1.systemName,function(val){
 				if(val != undefined){
@@ -99,16 +102,47 @@ var smaLocals=function(db){
 						item1.pageTitle=val2;
 					}					
 				});
-				callback1();
+
+
+				
 			});
 			
-		},function(err){
-			console.log('translation  was complete');
-			callback();
+		},function(eto,err){
+			console.log('translation  was complete--->menu items');
+			
 		});
 		
+		if(this.activeUser.additionalMenuItems!= undefined){
+					async.forEach(this.activeUser.additionalMenuItems,function(item1,callback2){
+						db.getVariableTranslated(activeLanguageGUID,item1.systemName,function(val){
+							if(val != undefined){
+								item1.screenName=val;
+							}
+							
+							console.log('item 1  is ---->  '+val)
+							db.getVariableTranslated(activeLanguageGUID,item1.pageTitle,function(val2){
+								if(val2!=undefined){
+									item1.pageTitle=val2;
+								}					
+							});
+		 
+							
+							callback2();
+						});
+						
+					},function(err){
+						console.log('translation  was complete--->additional menu items');
+						callback();
+					});
+
+
+			}
+	
 	}
+
+	
 }
+
 	
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
 var menuItem=function(screenName,pageTitle,viewName){
