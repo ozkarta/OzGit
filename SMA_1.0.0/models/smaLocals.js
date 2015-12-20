@@ -19,6 +19,7 @@ var smaLocals=function(db){
 
 	this.activePage; 
     
+    this.userInSession;
 
 	smaLocals.prototype.setActivePage=function(viewName){
 		console.log('Setting active page')
@@ -181,7 +182,7 @@ var userObject=function(isAuthenticated,userType,layoutName,headerName,footerNam
 	this.additionalMenuItems=additionalMenuItems;
 	this.defaultPage=defaultPage;
 
-	this.userInSession;
+	//this.userInSession=new userSession('','','','visitor');
 }
 
 var userSession=function(guid,email,password,userRole){

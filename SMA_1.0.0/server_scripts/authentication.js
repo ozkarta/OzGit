@@ -1,4 +1,6 @@
 var localStrategy=require('passport-local').Strategy;
+var bcrypt   = require('bcrypt-nodejs');
+
 var ozkartUser;
 
   module.exports=function(passport,sma,smaLocals){
@@ -30,7 +32,17 @@ var ozkartUser;
   				if(password=='12qwert12'){
   					//var k=new sma.userSession('GUID','ozbegi','12qwert12','client');
   					ozkartUser=new sma.userSession('GUID',email,password,'client');
-  					smaLocals.activeUser.userInSession=ozkartUser;
+  					smaLocals.userInSession=ozkartUser;
+            //smaLocals.userType=ozkartUser.userRole;
+            for(userIndex in smaLocals.smaUsers){
+              console.log(smaLocals.smaUsers[userIndex].userType+' VS '+ozkartUser.userRole)
+              if(smaLocals.smaUsers[userIndex].userType==ozkartUser.userRole){
+                console.dir(smaLocals.smaUsers[userIndex]);
+                smaLocals.activeUser=smaLocals.smaUsers[userIndex];
+                smaLocals.activeUser.isAuthenticated=true;
+                break;
+              }
+            }
   					return done(null,ozkartUser);
   				}else{
   					return  done(null,false);
@@ -40,6 +52,19 @@ var ozkartUser;
   			}
   	}));
   	
+
+/*   LOG OUT
+for(userIndex in smaLocals.smaUsers){
+              
+              if(smaLocals.smaUsers[userIndex].userType==visitor){
+                smaLocals.activeUser=smaLocals.smaUsers[userIndex];
+                smaLocals.activeUser.isAuthenticated=true;
+                break;
+              }
+            }
+*/
+
+
   }
 
 

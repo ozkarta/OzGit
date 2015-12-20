@@ -89,7 +89,7 @@
 
 			app.get('/*',function(req,res){
 
-				res.render('pages/error.ejs',smaLocals.locals());
+				res.render('visitor/error.ejs',smaLocals.locals());
 
 			})
 
@@ -102,7 +102,7 @@
 						console.log('default page was requested  by GET')
 						smaLocals.setActivePage(req.originalUrl);
 
-						res.render('pages/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
+						res.render(smaLocals.activeUser.userType+'/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
 
 						}
 		var getWithDefaults=function(req,res){
@@ -113,7 +113,7 @@
 		var trialGetAll =function(req,res){
 									console.log('_____________________________activating..............  '+req.originalUrl);
 									smaLocals.setActivePage(req.originalUrl);								
-									res.render('pages'+req.originalUrl,smaLocals.locals(),function(err,html){
+									res.render(smaLocals.activeUser.userType+req.originalUrl,smaLocals.locals(),function(err,html){
 										if(err){
 											console.log('1111111111');
 											res.redirect(404,'pages/error.ejs',smaLocals.locals())
@@ -129,7 +129,7 @@
 						console.log('page was requested  by  POST')
 						smaLocals.setSelectedLanguage(req.body.language,function(){
 							console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
-							res.render('pages/'+smaLocals.activePage.viewName,smaLocals.locals(),function(err,html){
+							res.render(smaLocals.activeUser.userType+'/'+smaLocals.activePage.viewName,smaLocals.locals(),function(err,html){
 								if(err){
 									console.log('Error  while  rendering page ....');
 									res.redirect(404,'pages/error.ejs',smaLocals.locals())
