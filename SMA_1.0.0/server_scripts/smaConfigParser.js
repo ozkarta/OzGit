@@ -153,7 +153,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 								}
 								
 
-
+ 
 						},function(err){
 							callback1();
 						});
@@ -234,21 +234,54 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 			console.log('called back');
 			call2();
 		});
-	}
+	} 
 	
 	var initMenu=function(menusObjectJSON,menusObject,call5){
 		if(menusObjectJSON != undefined){
 					for(var menu_item in menusObjectJSON[0]['menu_item']){
 						//smaLocals.menuItems.push(smaLocals.configInJSON.SMA.menus[0]['menu_item'][menu_item]);
-						menusObject.push(new sma.menuItem(menusObjectJSON[0]['menu_item'][menu_item].screen_name,
+						initPanelItems(menusObjectJSON[0]['menu_item'][menu_item],function(panelItemsObject){
+							
+								menusObject.push(new sma.menuItem(menusObjectJSON[0]['menu_item'][menu_item].screen_name,
 																  menusObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_title,
-																  menusObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_view_name
-							));
+																  menusObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_view_name,
+																  panelItemsObject
+											));
+						});
+
+
+						
 						console.log('menues  pushed');
 					}
-				}
+				} 
 		call5();
 	}
+
+	var initPanelItems=function(menuItemJSON,callback2){
+		if(menuItemJSON.left_panel!==undefined){
+			//console.dir(menuItemJSON.left_panel[0]);
+			//console.log('----------------------'); 
+			var  panelItemsObject=[];
+			async.forEach(menuItemJSON.left_panel[0]['panel_item'],function(panelItemObject,callback){
+				//console.log((panelItemObject.data_query).replace('',''))
+				dbConnector.newguid(function(guid){
+					console.log('guid is ______________ '+guid);
+					//panelItemsObject.push(new sma.panelItem(panelItemObject.screen_name,panelItemObject.data_query));
+					panelItemsObject.push(new sma.panelItem(panelItemObject.screen_name,guid));
+					smaLocals.actionQueries.push(new sma.queryObject(guid,panelItemObject.data_query))
+				})
+				callback();
+			},function(err){
+				callback2(panelItemsObject);
+			});
+		}
+		else{
+			callback2();
+		}
+		
+	}
+
+
 	var initDefaultPage=function(defaultPageObjectJSON,defaultPageObject,call6){
 		if(defaultPageObjectJSON != undefined){
 

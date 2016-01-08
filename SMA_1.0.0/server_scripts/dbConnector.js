@@ -112,7 +112,7 @@ dbConnector.prototype.getVariableTranslated=function(languageGUID,variableName,c
 		request.execute('getTranslatedVariableValue',function(err,recordsets,returnValue){
 			//console.log('translation..............');
 			//console.log('getTranslatedVariableValue '+languageGUID+'  ,  '+variableName)
-			//console.dir(recordsets);
+
 			if(recordsets!= undefined){
 				if(recordsets[0]!=undefined){
 					if(recordsets[0][0]!=undefined){
@@ -128,6 +128,30 @@ dbConnector.prototype.getVariableTranslated=function(languageGUID,variableName,c
 					callback(undefined);
 				}
 			
+		});
+	});
+}
+
+dbConnector.prototype.newguid=function(callback){
+	var connection=new this.sql.Connection(this.connectionJson,function(error){
+		var request=new sql.Request(connection);
+		request.query('select newid() as guid',function(error,recordsets){
+			console.log('___guid____request')
+			console.dir(recordsets[0].guid.toString());
+			if(recordsets!= undefined){
+				if(recordsets[0]!=undefined){
+					if(recordsets[0].guid!=undefined){
+						//console.log(recordsets[0][0].value);
+						callback(recordsets[0].guid.toString());
+					}else{
+						callback(undefined);
+					}
+				}else{
+					callback(undefined);
+				}
+			}else{
+					callback(undefined);
+				}
 		});
 	});
 }

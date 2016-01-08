@@ -35,13 +35,16 @@ app.use(flash());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 app.listen(2021);
+
+
 app.set('view engine','ejs');
 //app.set('layout','layouts/layout_version_0.1.ejs');
 app.use(expressLayouts)
 app.use(expressPartials())
 app.use(express.static(__dirname + '/public'));
-
 
 
 //    VARIABLES

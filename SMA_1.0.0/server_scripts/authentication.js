@@ -63,7 +63,20 @@ for(userIndex in smaLocals.smaUsers){
               }
             }
 */
+    passport.use('local-signup',new localStrategy({
+      usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+      },function(req,email,password,done){
+     /*   dbConnector.registerUser(function(err,newuser){
+          if(err)
+            return done(null)
+          else
+            return done(newuser);
 
+        };
+       */ 
+      }));
 
   }
 

@@ -17,11 +17,14 @@
     <!-- Custom CSS -->
     <link href="css/logo-nav.css" rel="stylesheet">
     
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+
     <script src="front_end_js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="front_end_js/bootstrap.min.js"></script>
-    
 
 
 </head>
@@ -90,10 +93,46 @@
         </div>
         <!-- /.container -->
     </nav>
+ 
 
-   
-    <%- body %>
-   
+ <%  if(leftPanel!==undefined){ %>
+    <div id="wrapper" style=" position:absolute;left:0% ;top:10%;width:100%">
+        <!--checks  if sidebar  is defined  and shows  only  if yes-->
+        
+        <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">
+                            Start Bootstrap
+                        </a>
+                    </li>
+                    <!--li>
+                        <a href="#">Dashboard</a>
+                    </li-->
+                   
+                    <%  activePage.panelItems.forEach(function(item){ %>
+                        <li>
+                            <a href="/<%= activePage.viewName+'?query='+item.itemActionQueryGUID %>"><%=item.itemName %></a>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+      
+         <%- body %>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+       
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <% }else { %> 
+    
+        <%- body %>
+
+
+    <% } %>
 
 
                      

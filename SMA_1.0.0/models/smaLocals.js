@@ -20,22 +20,29 @@ var smaLocals=function(db){
 	this.activePage; 
     
     this.userInSession;
-
+    this.actionQueries=[];
 	smaLocals.prototype.setActivePage=function(viewName){
 		console.log('Setting active page')
 		
 		var k=this.activeUser.menuItems.concat(this.activeUser.additionalMenuItems);
-		console.dir(k);
+		//console.dir(k);
+		if(viewName=='/'){
+				viewName='/'+this.activeUser.defaultPage.viewName;
+			}
 		for(var view in k){
 			//console.log('opa1')
+			
 			console.log(viewName +'VS'+ '/'+k[view].viewName)
 
 
 			if (viewName == '/'+k[view].viewName){
 
 				this.activePage=k[view];
+				break;
 			}
+
 		}
+		
 	}
 
 	smaLocals.prototype.locals=function(){
@@ -44,6 +51,7 @@ var smaLocals=function(db){
 				locals: {
 					'menuItems' : this.activeUser.menuItems,
 					'additionalMenuItems': this.activeUser.additionalMenuItems,
+					'leftPanel':this.activePage.panelItems,
 					'logoName': this.activeUser.logoName,
 					'languageItems': this.activeUser.languageItems,
 					'currentLanguage':this.activeUser.selectedLanguage,
@@ -146,12 +154,12 @@ var smaLocals=function(db){
 
 	
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
-var menuItem=function(screenName,pageTitle,viewName){
+var menuItem=function(screenName,pageTitle,viewName,panelItems){
 	this.screenName=screenName;
 	this.systemName=screenName;
 	this.pageTitle=pageTitle;
 	this.viewName=viewName;
-
+    this.panelItems=panelItems;
 }
 
 var defaultPageObject=function(pageTitle,viewName){
@@ -182,6 +190,7 @@ var userObject=function(isAuthenticated,userType,layoutName,headerName,footerNam
 	this.additionalMenuItems=additionalMenuItems;
 	this.defaultPage=defaultPage;
 
+	
 	//this.userInSession=new userSession('','','','visitor');
 }
 
@@ -193,8 +202,14 @@ var userSession=function(guid,email,password,userRole){
 	this.userRole=userRole;
 }
 
-
-
+var panelItem=function(itemName,itemActionQueryGUID){
+	this.itemName=itemName;
+	this.itemActionQueryGUID=itemActionQueryGUID;
+}
+var queryObject=function(guid,query){
+	this.guid=guid;
+	this.query=query;
+}
 //_________________________________________________________________________________________________________________
 
 module.exports.smaLocals=smaLocals;
@@ -203,3 +218,5 @@ module.exports.defaultPageObject=defaultPageObject;
 module.exports.languageObject=languageObject;
 module.exports.userObject=userObject;
 module.exports.userSession=userSession;
+module.exports.panelItem=panelItem;
+module.exports.queryObject=queryObject;

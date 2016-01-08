@@ -74,6 +74,10 @@
 			app.get('/index.ejs',function(req,res){
 				getIndex(req,res);
 			});
+			app.get('/logout.ejs',function(req,res){
+				logOut(smaLocals);
+				res.redirect('/')
+			});
 			
 
 		}
@@ -95,13 +99,14 @@
 
 			
 		}
-
+ 
 		//__________________________________GET________________________________________________________
 
 		var getIndex=function(req,res){
+						console.dir('query  aris    ____   '+req.params.query);
 						console.log('default page was requested  by GET')
-						smaLocals.setActivePage(req.originalUrl);
-
+						//smaLocals.setActivePage(req.originalUrl);
+						smaLocals.setActivePage(req.path);
 						res.render(smaLocals.activeUser.userType+'/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
 
 						}
@@ -111,9 +116,12 @@
 							res.render()
 						}
 		var trialGetAll =function(req,res){
-									console.log('_____________________________activating..............  '+req.originalUrl);
-									smaLocals.setActivePage(req.originalUrl);								
-									res.render(smaLocals.activeUser.userType+req.originalUrl,smaLocals.locals(),function(err,html){
+									console.log('_____________________________activating..............  '+req.path);
+									console.dir('query  aris    ____   '+req.params.query);
+									//smaLocals.setActivePage(req.originalUrl);
+									smaLocals.setActivePage(req.path);							
+									//res.render(smaLocals.activeUser.userType+req.originalUrl,smaLocals.locals(),function(err,html){
+									res.render(smaLocals.activeUser.userType+req.path,smaLocals.locals(),function(err,html){
 										if(err){
 											console.log('1111111111');
 											res.redirect(404,'pages/error.ejs',smaLocals.locals())
@@ -143,6 +151,17 @@
 		//________________________________ERROR__________________________________________________________
 		var renderError=function(req,res){
 			
+		}
+		var logOut=function(smaLocals){
+			for(userIndex in smaLocals.smaUsers){
+              //console.log(smaLocals.smaUsers[userIndex].userType+' VS '+ozkartUser.userRole)
+              if(smaLocals.smaUsers[userIndex].userType=='visitor'){
+                //console.dir(smaLocals.smaUsers[userIndex]);
+                smaLocals.activeUser=smaLocals.smaUsers[userIndex];
+                smaLocals.activeUser.isAuthenticated=true;
+                break;
+              }
+            }
 		}
 	}
 
