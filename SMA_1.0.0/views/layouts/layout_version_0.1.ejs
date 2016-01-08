@@ -113,7 +113,7 @@
                    
                     <%  activePage.panelItems.forEach(function(item){ %>
                         <li>
-                            <a href="/<%= activePage.viewName+'?query='+item.itemActionQueryGUID %>"><%=item.itemName %></a>
+                            <a href="/<%= activePage.viewName+'?queryGParam='+item.itemActionQueryGUID %>"><%=item.itemName %></a>
                         </li>
                     <% }); %>
                 </ul>

@@ -25,7 +25,7 @@ var dbConnector=function(sql){
 		        // ... error checks 
 		        //console.log(err.toString());
 		        
-		        console.log('value from db is '+recordset[0]['languageName']);
+		        //console.log('value from db is '+recordset[0]['languageName']);
 		    });
 		    
 		 
@@ -116,7 +116,7 @@ dbConnector.prototype.getVariableTranslated=function(languageGUID,variableName,c
 			if(recordsets!= undefined){
 				if(recordsets[0]!=undefined){
 					if(recordsets[0][0]!=undefined){
-						console.log(recordsets[0][0].value);
+						//console.log(recordsets[0][0].value);
 						callback(recordsets[0][0].value.toString());
 					}else{
 						callback(undefined);
@@ -136,8 +136,8 @@ dbConnector.prototype.newguid=function(callback){
 	var connection=new this.sql.Connection(this.connectionJson,function(error){
 		var request=new sql.Request(connection);
 		request.query('select newid() as guid',function(error,recordsets){
-			console.log('___guid____request')
-			console.dir(recordsets[0].guid.toString());
+			//console.log('___guid____request')
+			//console.dir(recordsets[0].guid.toString());
 			if(recordsets!= undefined){
 				if(recordsets[0]!=undefined){
 					if(recordsets[0].guid!=undefined){

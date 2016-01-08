@@ -184,13 +184,13 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 				dbConnector.getLnaguageDisplayName(lang,function(languageDisp,languageSys){
 				
 					dbConnector.getLanguageGUID(languageSys,function(guid,language){
-						    console.log('preparing  default  ...S... '+languageSys+'  '+languageDisp+'  '+guid);
+						    //console.log('preparing  default  ...S... '+languageSys+'  '+languageDisp+'  '+guid);
 							if(guid==undefined | language==undefined){
 								callback0()	;
 							}
 							else{
 								smaLocals.languageItems.push(new sma.languageObject(guid,languageDisp,languageSys));
-								console.log('pushed');
+								console.log('language item was pushed');
 								val=false;
 								callback0()	;
 							}
@@ -198,11 +198,11 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 					});				
 				});
 			  //callback0();
-			console.log(val);
+			//console.log(val);
 			
 
 		},function(err){
-			console.log('called back');
+			//console.log('called back');
 			call2();
 		});
 	}
@@ -213,13 +213,13 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 				dbConnector.getLnaguageDisplayName(lang,function(languageDisp,languageSys){
 				
 					dbConnector.getLanguageGUID(languageSys,function(guid,language){
-						    console.log('preparing  default  ...USER... '+languageSys+'  '+languageDisp+'  '+guid);
+						    //console.log('preparing  default  ...USER... '+languageSys+'  '+languageDisp+'  '+guid);
 							if(guid==undefined | language==undefined){
 								callback0()	;
 							}
 							else{
 								userLanguage.push(new sma.languageObject(guid,languageDisp,languageSys));
-								console.log('pushed  for user ....');
+								console.log('User was Pushed');
 								val=false;
 								callback0()	;
 							}
@@ -227,11 +227,11 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 					});				
 				});
 			  //callback0();
-			console.log(val);
+			//console.log(val);
 			
 
 		},function(err){
-			console.log('called back');
+			//console.log('called back');
 			call2();
 		});
 	} 
@@ -251,7 +251,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 
 
 						
-						console.log('menues  pushed');
+						console.log('menues were pushed');
 					}
 				} 
 		call5();
@@ -265,7 +265,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 			async.forEach(menuItemJSON.left_panel[0]['panel_item'],function(panelItemObject,callback){
 				//console.log((panelItemObject.data_query).replace('',''))
 				dbConnector.newguid(function(guid){
-					console.log('guid is ______________ '+guid);
+					//console.log('guid is ______________ '+guid);
 					//panelItemsObject.push(new sma.panelItem(panelItemObject.screen_name,panelItemObject.data_query));
 					panelItemsObject.push(new sma.panelItem(panelItemObject.screen_name,guid));
 					smaLocals.actionQueries.push(new sma.queryObject(guid,panelItemObject.data_query))
@@ -291,7 +291,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 					console.dir(defaultPageObject);
 				}
 
-		console.log('default page is calling  back')
+		//console.log('default page is calling  back')
 		call6(defaultPageObject);
 	}
 	var initAdditionalMenu=function(additionalMenuObjectJSON,additionalMenuObject,callback){
@@ -302,7 +302,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 																  additionalMenuObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_title,
 																  additionalMenuObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_view_name
 							));
-						console.log('additional menues  pushed');
+						console.log('additional menues were pushed');
 					}
 				}
 		callback();

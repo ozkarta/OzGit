@@ -6,23 +6,23 @@
 		registerRoutings.prototype.register=function(app,smaLocals,callback){
 
 
-		console.log('BEGIN DEBUG  ____ROUTINGS___')
-		console.log('the layout name is : '+smaLocals.activeUser.layoutName);
-		console.log('the header name is : '+smaLocals.activeUser.headerName);
-		console.log('the footer name is : '+smaLocals.activeUser.footerName);
+		//console.log('BEGIN DEBUG  ____ROUTINGS___')
+		//console.log('the layout name is : '+smaLocals.activeUser.layoutName);
+		//console.log('the header name is : '+smaLocals.activeUser.headerName);
+		//console.log('the footer name is : '+smaLocals.activeUser.footerName);
 		for(var i=0;i<smaLocals.activeUser.menuItems.length;i++){
-			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].screenName);
-			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].pageTitle);
-			console.log('menus  --->'+smaLocals.activeUser.menuItems[i].viewName);
+			//console.log('menus  --->'+smaLocals.activeUser.menuItems[i].screenName);
+			//console.log('menus  --->'+smaLocals.activeUser.menuItems[i].pageTitle);
+			//console.log('menus  --->'+smaLocals.activeUser.menuItems[i].viewName);
 
 		}
 
 
 		for(var i=0;i<smaLocals.activeUser.languageItems.length;i++){
-			console.log('languages --->'+smaLocals.activeUser.languageItems[i].languageName+'---->'+smaLocals.languageItems[i].languageGUID);
+			//console.log('languages --->'+smaLocals.activeUser.languageItems[i].languageName+'---->'+smaLocals.languageItems[i].languageGUID);
 		}
 
-		console.log('END DEBUG  ____ROUTINGS___')
+		//console.log('END DEBUG  ____ROUTINGS___')
 
 
 			
@@ -33,7 +33,7 @@
 
 			defaultPost(app,smaLocals);
 
-			defaultGet(app,smaLocals);
+			//defaultGet(app,smaLocals);
 		
 			trialGet(app,smaLocals);
 			callback();
@@ -83,9 +83,15 @@
 		}
 		function trialGet(app,smaLocals){
 			var allArr=smaLocals.activeUser.menuItems.concat(smaLocals.activeUser.additionalMenuItems);
-			console.dir(allArr)
+			//console.dir(allArr)
+			app.get('/',function(req,res){
+				trialGetAll(req,res);
+			});
+			app.get('/index.ejs',function(req,res){
+				trialGetAll(req,res);
+			});
 			for(var pages in allArr){
-				console.log("the  pages  routed   are  :.....    "+allArr[pages].viewName);
+				//console.log("the  pages  routed   are  :.....    "+allArr[pages].viewName);
 				app.get('/'+allArr[pages].viewName,function(req,res){
 					trialGetAll(req,res)
 				});
@@ -103,27 +109,28 @@
 		//__________________________________GET________________________________________________________
 
 		var getIndex=function(req,res){
-						console.dir('query  aris    ____   '+req.params.query);
-						console.log('default page was requested  by GET')
+						//console.dir(req)
+						console.dir('___query  aris    ____   '+req.query.queryGParam);
+						//console.log('default page was requested  by GET')
 						//smaLocals.setActivePage(req.originalUrl);
 						smaLocals.setActivePage(req.path);
 						res.render(smaLocals.activeUser.userType+'/'+smaLocals.activeUser.defaultPage.viewName,smaLocals.locals());
 
 						}
 		var getWithDefaults=function(req,res){
-							console.log('default page was requested  by GET')
+							//console.log('default page was requested  by GET')
 							smaLocals.setActivePage(req.originalUrl);
 							res.render()
 						}
 		var trialGetAll =function(req,res){
-									console.log('_____________________________activating..............  '+req.path);
-									console.dir('query  aris    ____   '+req.params.query);
+									//console.log('_____________________________activating..............  '+req.path);
+									console.dir('___query  aris    ____   '+req.query.queryGParam);
 									//smaLocals.setActivePage(req.originalUrl);
 									smaLocals.setActivePage(req.path);							
 									//res.render(smaLocals.activeUser.userType+req.originalUrl,smaLocals.locals(),function(err,html){
 									res.render(smaLocals.activeUser.userType+req.path,smaLocals.locals(),function(err,html){
 										if(err){
-											console.log('1111111111');
+											//console.log('1111111111');
 											res.redirect(404,'pages/error.ejs',smaLocals.locals())
 										}else{
 											res.send(html);
@@ -134,9 +141,9 @@
 							};
 		//_________________________________POST_________________________________________________________
 		var postIndex=function(req,res){
-						console.log('page was requested  by  POST')
+						//console.log('page was requested  by  POST')
 						smaLocals.setSelectedLanguage(req.body.language,function(){
-							console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
+							//console.log('rendering with ....'+smaLocals.activeUser.selectedLanguage);
 							res.render(smaLocals.activeUser.userType+'/'+smaLocals.activePage.viewName,smaLocals.locals(),function(err,html){
 								if(err){
 									console.log('Error  while  rendering page ....');

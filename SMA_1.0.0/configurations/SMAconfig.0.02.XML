@@ -36,11 +36,12 @@
 						</screen_page>
 						<left_panel>
 							<panel_item>
-								<screen_name>Steering Rods</screen_name>
+								<screen_name>All Products</screen_name>
 								<data_query>
 									<![CDATA[--  data query  to be executed   on  panel_item  press
 
 										--  select * from Products
+										select * from products 
 									]]>
 								</data_query>
 							</panel_item>

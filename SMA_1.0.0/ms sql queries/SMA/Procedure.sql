@@ -13,7 +13,7 @@ WHERE name LIKE N'%'
 
 EXEC sp_executesql @sql;
 go
-
+--				HISTORY 1
 -------------------------------------------------------------------------------------------------------------
 --create procedure  getLanguageList
 --as

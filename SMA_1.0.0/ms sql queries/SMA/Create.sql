@@ -19,6 +19,8 @@ go
 create  table  [languages]
 (
 	[languageGUID]					varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[languageSystemName]					Nvarchar(50) not null,
 	[languageDisplayName]			nvarchar(500) not null
 )
@@ -27,14 +29,19 @@ create table [variables]
 (
 	[languageGUID]					varchar(50) not null,
 	[variableGUID]					varchar(50) not null,
+	[effDate]						datetime default getdate(),
+
 	[variableName]					Nvarchar(100) not null,
 	[value]							Nvarchar(max) not null
 )
 
 go
+/*
 create table countriesIso
 (
 	[countryGUID]				varchar(50) not null,
+	[effDate]					datetime default getdate(),
+
 	[Comman Name]				varchar(500) not null,
 	[Formal Name]				varchar(500) not null,
 	[Type]						varchar(500) not null,
@@ -47,21 +54,25 @@ create table countriesIso
 	[IANA Country Code TLD]		varchar(100) not null
 )
 
-
+*/
 GO
 
 create table [accessLevels]
 (
 	[levelGUID]						varchar(50) not null,
+	[effDate]						datetime default getdate(),
+
 	[level]							int not null,
 	[levelName]						varchar(50),
 )
 go
 CREATE TABLE [usersGeneral] 
 (
-	[LanguageGUID]					varchar(50) not null,						--  As  Default Language  
-	[userGUID]                      VARCHAR (50)   NOT NULL default newid(),
+	[LanguageGUID]					varchar(50) not null,						--  As  Default Language 
+	[effDate]						datetime default getdate(), 
 	[levelGUID]						varchar(50) not null,
+	[userGUID]                      VARCHAR (50)   NOT NULL default newid(),
+	
 	---------------------Autorization
     
     [email]							NVARCHAR (256) not NULL,
@@ -85,10 +96,12 @@ CREATE TABLE [usersGeneral]
 );
 
 go 
-
+/*
 create table clientProfile
 (
 	[CountryGUID]						varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[City]								varchar(100) not null,
 	[Address1]							varchar(100) not null,
 	[Address2]							varchar(100) not null,
@@ -102,6 +115,8 @@ go
 create table workerProfile
 (
 	[CountryGUID]						varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[City]								varchar(100) not null,
 	[Address1]							varchar(100) not null,
 	[Address2]							varchar(100) not null,
@@ -129,6 +144,8 @@ go
 create table HRProfile
 (
 	[CountryGUID]						varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[City]								varchar(100) not null,
 	[Address1]							varchar(100) not null,
 	[Address2]							varchar(100) not null,
@@ -153,6 +170,8 @@ go
 create table  job
 (
 	[jobGUID]							varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[jobTitle]							nvarchar(150) not null,
 	[jobDescription]					nvarchar(100) not null,
 
@@ -169,12 +188,16 @@ create table  job
 	[jobTypeGroupGUID]					varchar(50) not null
 
 )
+
+
 go
 
 create table mediaForJob
 (
 	[mediaGUID]							varchar(50) not null,
 	[jobGUID]							varchar(50) not null,
+	[effDate]							datetime default getdate(),
+
 	[mediaType]							varchar(50) not null,
 	[mediaLink]							varchar(max) not null,
 	[mediaName]							varchar(500) not null,
@@ -187,6 +210,7 @@ create table interviews
 (
 	[interviewGUID]						varchar(50) not null,
 	[jobGUID]							varchar(50) not null,
+	[effDate]							datetime default getdate(),
 
 	[candidateHRGUID]					varchar(50) not null,
 	[suggestedPrice]					varchar(10) not null,
@@ -194,10 +218,57 @@ create table interviews
 	[candidateMotivationLetter]			nvarchar(max),
 
 )
-
+go
 create table schedule
 (
-	[ScheduleGUID]						varchar(50) not null
+	[ScheduleGUID]						varchar(50) not null,
+	[effDate]							datetime default getdate()
+)
+
+*/
+go
+
+
+
+create table product
+(
+languageGUID						varchar(50) not null,
+peoductGUID							varchar(50) not null,
+[effDate]							datetime default getdate(),
+SequenceNum							int not null,
+
+productCategoryGUID					varchar(50) not null,
+
+productName							varchar(100) not null,
+productDescriptionShort				varchar(100) not null,
+productDescriptionLong				varchar(max) not null,
+
+productQuantityHist					numeric		 not null,
+productQuanityAvailable				numeric		 not null,
+
+warehousePrice						numeric		 not null,
+warehousePriceFloor					numeric      not null, 
+wareHousePriceCeiling				numeric      not null,
+
+sellingPrice						numeric		 not null,
+sellingPriceFloor					numeric		 not null,
+sellingPriceCeiling					numeric		 not null,
 
 )
+
 go
+
+create table productCategory
+(
+	categoryGUID					varchar(50) not null,
+	categoryName					varchar(100) not null
+)
+
+create table productMediaFileInformation
+(
+productGUID							varchar(50) not null,
+mediaGUID							varchar(50) not null,
+mediaType							varchar(100) not null,   --  DetailedView,Or MainView
+mediaLocationURI					Nvarchar(max) not null
+
+)

@@ -32,7 +32,7 @@ var smaLocals=function(db){
 		for(var view in k){
 			//console.log('opa1')
 			
-			console.log(viewName +'VS'+ '/'+k[view].viewName)
+			console.log(viewName +' VS '+ '/'+k[view].viewName)
 
 
 			if (viewName == '/'+k[view].viewName){
@@ -58,7 +58,7 @@ var smaLocals=function(db){
 					'activePage':this.activePage
 					}
 				}
-		console.log("yleoba aris ----- "+toReturn.locals.currentLanguage);
+		console.log("Language  IS ----- "+toReturn.locals.currentLanguage);
 
 		return  toReturn;
 	}
@@ -69,10 +69,10 @@ var smaLocals=function(db){
 			//console.log(this.languageItems[langObject].languageName+" VS "+languageNameProvided);
 			if (this.activeUser.languageItems[langObject].languageName===languageNameProvided){
 				this.activeUser.selectedLanguage=this.activeUser.languageItems[langObject].languageSystemName;	
-				console.log(this.activeUser.languageItems[langObject].languageName+" VS "+languageNameProvided);
-				console.log('returned:)) with '+this.activeUser.selectedLanguage);
+				//console.log(this.activeUser.languageItems[langObject].languageName+" VS "+languageNameProvided);
+				//console.log('returned:)) with '+this.activeUser.selectedLanguage);
 				this.translateActiveUser(function(){
-					console.log('-------------------------------------translation----  calling back')
+					//console.log('-------------------------------------translation----  calling back')
 					callback();		
 				});
 				break;
@@ -97,7 +97,7 @@ var smaLocals=function(db){
 		//console.log('______________________TRANSLATING______________________________');
 		//console.dir(this.activeUser.menuItems);
 
-		console.log('began  translation ......')
+		//console.log('began  translation ......')
 		///    TRANSLATE MENUITEM
 		async.forEach(this.activeUser.menuItems,function(item1,callback1){
 			db.getVariableTranslated(activeLanguageGUID,item1.systemName,function(val){
@@ -128,7 +128,7 @@ var smaLocals=function(db){
 								item1.screenName=val;
 							}
 							
-							console.log('item 1  is ---->  '+val)
+							//console.log('item 1  is ---->  '+val)
 							db.getVariableTranslated(activeLanguageGUID,item1.pageTitle,function(val2){
 								if(val2!=undefined){
 									item1.pageTitle=val2;

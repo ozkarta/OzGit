@@ -197,7 +197,9 @@ values  ------------------------------------------
 		--------------------------------------------------------
 		--
 		--------------------------------------------------------
-go
+
+
+/*
 declare @counter as integer
 set @counter=1
 insert into accessLevels(levelGUID,levelName,[level])
@@ -221,8 +223,8 @@ insert into accessLevels(levelGUID,levelName,[level])
 insert into accessLevels(levelGUID,levelName,[level])
 	values(newid(),'SMAMANAGER',@counter)
 	set @counter=@counter+1
+*/
 
-go
 
 
 
@@ -248,4 +250,72 @@ go
 --insert into usersGeneral
 --select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAManager','ozbegi','kartvelishvili','',getdate() 
 --go
+declare @n1 varchar(50)=newid()
+declare @n2 varchar(50)=newid()
+declare @n3 varchar(50)=newid()
 
+insert into productCategory
+SELECT @n1 as [categoryGUID]
+      ,'IntakeSystems' as [categoryName]
+UNION
+SELECT @n2 as [categoryGUID]
+      ,'ElectricParts' as [categoryName]
+UNION
+SELECT @n3 as [categoryGUID]
+      ,'SteeringRods' as [categoryName]
+
+insert into  product
+	SELECT @en as [languageGUID]
+		  ,newid() as [peoductGUID]
+		  ,getdate() as [effDate]
+		  ,0 as [SequenceNum]
+		  ,@n1 as [productCategoryGUID]
+		  ,'HKS Air Filter'  as [productName]
+		  ,'' as [productDescriptionShort]
+		  ,'' as [productDescriptionLong]
+		  ,10 as [productQuantityHist]
+		  ,10 as [productQuanityAvailable]
+		  ,35 as [warehousePrice]
+		  ,35 as [warehousePriceFloor]
+		  ,35 as [wareHousePriceCeiling]
+		  ,55 as [sellingPrice]
+		  ,55 as [sellingPriceFloor]
+		  ,55 as [sellingPriceCeiling]
+UNION
+	SELECT @en as [languageGUID]
+		  ,newid() as [peoductGUID]
+		  ,getdate() as [effDate]
+		  ,0 as [SequenceNum]
+		  ,@n2 as [productCategoryGUID]
+		  ,'' as [productName]
+		  ,'' as [productDescriptionShort]
+		  ,'' as [productDescriptionLong]
+		  ,10[productQuantityHist]
+		  ,10[productQuanityAvailable]
+		  ,23[warehousePrice]
+		  ,23[warehousePriceFloor]
+		  ,23[wareHousePriceCeiling]
+		  ,33[sellingPrice]
+		  ,33[sellingPriceFloor]
+		  ,33[sellingPriceCeiling]
+UNION
+		SELECT @en as [languageGUID]
+		  ,newid() as [peoductGUID]
+		  ,getdate() as [effDate]
+		  ,0 as [SequenceNum]
+		  ,@n3[productCategoryGUID]
+		  ,'' as [productName]
+		  ,'' as [productDescriptionShort]
+		  ,'' as [productDescriptionLong]
+		  ,10 as [productQuantityHist]
+		  ,10 as [productQuanityAvailable]
+		  ,50 as [warehousePrice]
+		  ,50 as [warehousePriceFloor]
+		  ,50 as [wareHousePriceCeiling]
+		  ,80 as [sellingPrice]
+		  ,80 as [sellingPriceFloor]
+		  ,80 as [sellingPriceCeiling]
+
+go
+
+select * from product
