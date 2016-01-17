@@ -85,7 +85,7 @@
 			var allArr=smaLocals.activeUser.menuItems.concat(smaLocals.activeUser.additionalMenuItems);
 			//console.dir(allArr)
 			app.get('/',function(req,res){
-				trialGetAll(req,res);
+				trialGetAll(req,res); 
 			});
 			app.get('/index.ejs',function(req,res){
 				trialGetAll(req,res);
@@ -124,10 +124,45 @@
 						}
 		var trialGetAll =function(req,res){
 									//console.log('_____________________________activating..............  '+req.path);
-									console.dir('___query  aris    ____   '+req.query.queryGParam);
+									//console.dir('___query  aris    ____   '+req.query.queryGParam);
 									//smaLocals.setActivePage(req.originalUrl);
-									smaLocals.setActivePage(req.path);							
+									smaLocals.dataSet=undefined;			
 									//res.render(smaLocals.activeUser.userType+req.originalUrl,smaLocals.locals(),function(err,html){
+									smaLocals.setActivePage(req.path);	
+
+
+									if(req.query.queryGParam!==undefined){
+										smaLocals.initializeDataSetFromRequestedQueryGUID(req.query.queryGParam,function(dataset){
+												smaLocals.dataSet=dataset;
+
+														
+												res.render(smaLocals.activeUser.userType+req.path,smaLocals.locals(),function(err,html){
+													if(err){
+														console.dir(err);
+														res.redirect(404,'pages/error.ejs',smaLocals.locals())
+													}else{
+														res.send(html);
+													}
+												});
+										
+										});
+									}else{
+										//smaLocals.setActivePage(req.path);
+											if(smaLocals.activeUser.activePage.menuItems.defaultDataSetQuery!=undefined){
+												
+											}	
+											res.render(smaLocals.activeUser.userType+req.path,smaLocals.locals(),function(err,html){
+												if(err){
+													console.dir(err);
+													res.redirect(404,'pages/error.ejs',smaLocals.locals())
+												}else{
+													res.send(html);
+												}
+											});
+									}
+									
+									
+									/*
 									res.render(smaLocals.activeUser.userType+req.path,smaLocals.locals(),function(err,html){
 										if(err){
 											//console.log('1111111111');
@@ -136,7 +171,7 @@
 											res.send(html);
 										}
 									});
-									
+									*/
 								
 							};
 		//_________________________________POST_________________________________________________________

@@ -266,15 +266,15 @@ SELECT @n3 as [categoryGUID]
 
 insert into  product
 	SELECT @en as [languageGUID]
-		  ,newid() as [peoductGUID]
+		  ,newid() as [productGUID]
 		  ,getdate() as [effDate]
 		  ,0 as [SequenceNum]
 		  ,@n1 as [productCategoryGUID]
 		  ,'HKS Air Filter'  as [productName]
-		  ,'' as [productDescriptionShort]
+		  ,'The Racing HKS Air Intake filter  for increasing car performance' as [productDescriptionShort]
 		  ,'' as [productDescriptionLong]
 		  ,10 as [productQuantityHist]
-		  ,10 as [productQuanityAvailable]
+		  ,10 as [productQuantityAvailable]
 		  ,35 as [warehousePrice]
 		  ,35 as [warehousePriceFloor]
 		  ,35 as [wareHousePriceCeiling]
@@ -283,32 +283,32 @@ insert into  product
 		  ,55 as [sellingPriceCeiling]
 UNION
 	SELECT @en as [languageGUID]
-		  ,newid() as [peoductGUID]
+		  ,newid() as [productGUID]
 		  ,getdate() as [effDate]
 		  ,0 as [SequenceNum]
 		  ,@n2 as [productCategoryGUID]
-		  ,'' as [productName]
-		  ,'' as [productDescriptionShort]
+		  ,'Ignition Toggle Panel' as [productName]
+		  ,'Racing  use only!!! excelent item  for your sport car' as [productDescriptionShort]
 		  ,'' as [productDescriptionLong]
-		  ,10[productQuantityHist]
-		  ,10[productQuanityAvailable]
-		  ,23[warehousePrice]
-		  ,23[warehousePriceFloor]
-		  ,23[wareHousePriceCeiling]
-		  ,33[sellingPrice]
-		  ,33[sellingPriceFloor]
-		  ,33[sellingPriceCeiling]
+		  ,10 as [productQuantityHist]
+		  ,10 as [productQuantityAvailable]
+		  ,23 as [warehousePrice]
+		  ,23 as [warehousePriceFloor]
+		  ,23 as [wareHousePriceCeiling]
+		  ,33 as [sellingPrice]
+		  ,33 as [sellingPriceFloor]
+		  ,33 as [sellingPriceCeiling]
 UNION
 		SELECT @en as [languageGUID]
-		  ,newid() as [peoductGUID]
+		  ,newid() as [productGUID]
 		  ,getdate() as [effDate]
 		  ,0 as [SequenceNum]
 		  ,@n3[productCategoryGUID]
-		  ,'' as [productName]
-		  ,'' as [productDescriptionShort]
+		  ,'MOMO Steering Rod' as [productName]
+		  ,'Perfect Performance With MOMO  racing steering wheel, Drive and go fuck yourself ' as [productDescriptionShort]
 		  ,'' as [productDescriptionLong]
 		  ,10 as [productQuantityHist]
-		  ,10 as [productQuanityAvailable]
+		  ,10 as [productQuantityAvailable]
 		  ,50 as [warehousePrice]
 		  ,50 as [warehousePriceFloor]
 		  ,50 as [wareHousePriceCeiling]
@@ -316,6 +316,25 @@ UNION
 		  ,80 as [sellingPriceFloor]
 		  ,80 as [sellingPriceCeiling]
 
-go
+
 
 select * from product
+
+insert into productMediaFileInformation
+select 
+	@n1		as ProductGUID,
+	newid() as MediaGUID,
+	'ListImage' as MediaType,
+	'resources/images/hkssuperpowerflow-ak005-cropcopy.jpeg' as MediaLocationURI
+UNION
+select 
+	@n2		as ProductGUID,
+	newid() as MediaGUID,
+	'ListImage' as MediaType,
+	'resources/images/hkssuperpowerflow-ak005-cropcopy.jpeg' as MediaLocationURI
+UNION
+select 
+	@n3		as ProductGUID,
+	newid() as MediaGUID,
+	'ListImage' as MediaType,
+	'resources/images/mh40rNm60BH2_aR5SvQ4M1Q.jpeg' as MediaLocationURI

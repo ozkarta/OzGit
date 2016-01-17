@@ -233,7 +233,7 @@ go
 create table product
 (
 languageGUID						varchar(50) not null,
-peoductGUID							varchar(50) not null,
+productGUID							varchar(50) not null,
 [effDate]							datetime default getdate(),
 SequenceNum							int not null,
 
@@ -244,7 +244,7 @@ productDescriptionShort				varchar(100) not null,
 productDescriptionLong				varchar(max) not null,
 
 productQuantityHist					numeric		 not null,
-productQuanityAvailable				numeric		 not null,
+productQuantityAvailable				numeric		 not null,
 
 warehousePrice						numeric		 not null,
 warehousePriceFloor					numeric      not null, 

@@ -21,6 +21,7 @@ var smaLocals=function(db){
     
     this.userInSession;
     this.actionQueries=[];
+    this.dataSet=undefined;
 	smaLocals.prototype.setActivePage=function(viewName){
 		console.log('Setting active page')
 		
@@ -55,14 +56,16 @@ var smaLocals=function(db){
 					'logoName': this.activeUser.logoName,
 					'languageItems': this.activeUser.languageItems,
 					'currentLanguage':this.activeUser.selectedLanguage,
-					'activePage':this.activePage
+					'activePage':this.activePage,
+					'dataset':this.dataSet
 					}
 				}
-		console.log("Language  IS ----- "+toReturn.locals.currentLanguage);
+		//console.log("locals   IS ----- ");
+		//console.dir(toReturn.locals);
 
 		return  toReturn;
 	}
-
+ 
 	smaLocals.prototype.setSelectedLanguage=function(languageNameProvided,callback){
 	
 		for(var langObject in this.activeUser.languageItems){
@@ -78,7 +81,7 @@ var smaLocals=function(db){
 				break;
 			};
 		}
-		
+		 
 	}
 
 	smaLocals.prototype.translateActiveUser = function(callback){
@@ -149,17 +152,36 @@ var smaLocals=function(db){
 	
 	}
 
-	
+	smaLocals.prototype.initializeDataSetFromRequestedQueryGUID=function(guid,callback){
+		for (var i in this.actionQueries){
+			//console.log(this.actionQueries[i].query.toString());
+			if (this.actionQueries[i].guid===guid){
+				//console.log(this.actionQueries[i].query.toString());
+				db.executeReadFromStringQuery(this.actionQueries[i].query.toString(),function(recordsets){
+					//smaLocals.dataSet=recordsets;
+					//console.log('dataset  from  DB  was populated  ')
+					//console.dir(smaLocals.dataSet);
+					callback(recordsets);
+				});
+				break;
+			}
+		}
+		//callback(undefined);
+
+
+		//db.executeReadFromStringQuery()
+	}
 }
 
 	
 //____________________________________OUT_OF_CLASS_VARIABLES________________________________________________________
-var menuItem=function(screenName,pageTitle,viewName,panelItems){
+var menuItem=function(screenName,pageTitle,viewName,panelItems,defaultDataSetQuery){
 	this.screenName=screenName;
 	this.systemName=screenName;
 	this.pageTitle=pageTitle;
 	this.viewName=viewName;
     this.panelItems=panelItems;
+    this.defaultDataSetQuery=defaultDataSetQuery;
 }
 
 var defaultPageObject=function(pageTitle,viewName){

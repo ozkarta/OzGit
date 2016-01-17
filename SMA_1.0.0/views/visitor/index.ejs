@@ -1,37 +1,86 @@
  <br/>
  <br/>
+ <div class="container" style="width:95%">
+<%  
+    if(dataset!==undefined){
 
+
+
+        dataset.forEach(function(item){
+%>
+<div class="row" >
+
+                            <div class="">
+                                <div class="thumbnail">
+                                    
+                                    <div class="caption">
+                                        <img src="<%=item.ImageURI %>" alt="PRODUCT IMAGE" style="width:25%;height:60%">
+                                        <h4 class="pull-right">$<%=item.Price %></h4>
+                                        <h4><a href="#"><%=item.ListItemName %></a>
+                                        </h4>
+                                        <p><%=item.Description %></p>
+                                    </div>
+                                    <div class="ratings">
+                                        <p class="pull-right">15 reviews</p>
+                                        <p>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+        </div>
+        <hr>
+
+
+<%
+        });
+    }
+%>
+</div>
  <div class="container" style="width:95%">
 
+        <%/* if('')!==undefined){ dataset.forEach(function(item){ %>
 
-				<div class="row" >
+        <div class="row" >
 
-                    <div class="">
-                        <div class="thumbnail">
-                            
-                            <div class="caption">
-                            	<img src="http://placehold.it/320x150" alt="">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                            <div class="">
+                                <div class="thumbnail">
+                                    
+                                    <div class="caption">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <h4 class="pull-right">$24.99</h4>
+                                        <h4><a href="#">First Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                    </div>
+                                    <div class="ratings">
+                                        <p class="pull-right">15 reviews</p>
+                                        <p>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
+        </div>
+        <hr>
+
+         <%   }) }   */%>
+
+
+
+				
                     
 
 
-                </div>
- 				<hr>
+              
 </div>

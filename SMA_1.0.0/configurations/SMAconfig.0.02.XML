@@ -27,6 +27,7 @@
 					<language_variable>russian</language_variable>
 					<language_variable>german</language_variable>
 				</languages>
+
 				<menus>
 					<menu_item>
 						<screen_name>home</screen_name>
@@ -34,21 +35,57 @@
 							<page_title>homeTitle</page_title>
 							<page_view_name>index.ejs</page_view_name>
 						</screen_page>
+						<default_list_dataset>
+							<data_query>
+											<![CDATA[--  data query  to be executed   on  Home  press 1
+
+												--  select * from Products
+												--select * from product
+												
+												select p.productGUID				 as UniqueID,
+													   p.productName				 as ListItemName,
+													   p.productDescriptionShort 	 as Description,
+													   p.productQuantityAvailable  as Quantity,
+													   p.sellingPrice 			 as Price,
+													   mfi.mediaLocationURI		as ImageURI
+												from   product p
+												left JOIN  productMediaFileInformation mfi
+												on mfi.ProductGUID=p.productGUID 
+													and mfi.mediaType='ListImage'	
+												ORDER BY EFFDATE DESC	
+
+											]]>
+							</data_query>
+						</default_list_dataset>
 						<left_panel>
 							<panel_item>
-								<screen_name>All Products</screen_name>
+								<screen_name>Not Intake Systems</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  Home  press 1
 
 										--  select * from Products
-										select * from products 
+										--select * from product
+										
+										select p.productGUID				 as UniqueID,
+											   p.productName				 as ListItemName,
+											   p.productDescriptionShort 	 as Description,
+											   p.productQuantityAvailable  as Quantity,
+											   p.sellingPrice 			 as Price,
+											   mfi.mediaLocationURI		as ImageURI
+										from   product p
+										left JOIN  productMediaFileInformation mfi
+										on mfi.ProductGUID=p.productGUID 
+											and mfi.mediaType='ListImage'
+										where p.ProductCategoryGUID not in (select CategoryGUID from ProductCategory where CategoryName='IntakeSystems')
+
+
 									]]>
 								</data_query>
 							</panel_item>
 							<panel_item>
 								<screen_name>Steering Wheels</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  Home  press 2
 
 										--  select * from Products
 									]]>
@@ -57,7 +94,7 @@
 							<panel_item>
 								<screen_name>Car Electronics</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  Home  press 3
 
 										--  select * from Products
 									]]>
@@ -72,11 +109,19 @@
 							<page_title>aboutTitle</page_title>
 							<page_view_name>about.ejs</page_view_name>
 						</screen_page>
+						<default_list_dataset>
+							<data_query>
+											<![CDATA[--  data query  to be executed   on  Home  press 1
+
+
+											]]>
+										</data_query>
+						</default_list_dataset>
 						<left_panel>
 							<panel_item>
 								<screen_name>item 1 for about</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  About  press 1
 
 										--  select * from Products
 									]]>
@@ -85,7 +130,7 @@
 							<panel_item>
 								<screen_name>item 2 for about</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  About  press 2
 
 										--  select * from Products
 									]]>
@@ -94,7 +139,7 @@
 							<panel_item>
 								<screen_name>item 3 for about</screen_name>
 								<data_query>
-									<![CDATA[--  data query  to be executed   on  panel_item  press
+									<![CDATA[--  data query  to be executed   on  About  press 3
 
 										--  select * from Products
 									]]>
@@ -108,6 +153,15 @@
 							<page_title>SMA Contact Page</page_title>
 							<page_view_name>contact.ejs</page_view_name>
 						</screen_page>
+						<default_list_dataset>
+							<data_query>
+											<![CDATA[--  data query  to be executed   on  Home  press 1
+
+											
+
+											]]>
+										</data_query>
+						</default_list_dataset>
 					</menu_item>
 					<menu_item>
 						<screen_name>tESTER</screen_name>
@@ -115,6 +169,15 @@
 							<page_title>SMA tESTER Page</page_title>
 							<page_view_name>tESTER.ejs</page_view_name>
 						</screen_page>
+						<default_list_dataset>
+							<data_query>
+											<![CDATA[--  data query  to be executed   on  Home  press 1
+
+											
+
+											]]>
+										</data_query>
+						</default_list_dataset>
 					</menu_item>
 				</menus>
 				
@@ -157,6 +220,14 @@
 						<page_title></page_title>
 						<page_view_name></page_view_name>
 					</screen_page>
+					<default_list_dataset>
+						<data_query>
+										<![CDATA[--  data query  to be executed   on  Home  press 1
+
+
+										]]>
+						</data_query>
+					</default_list_dataset>
 				</menu_item>				
 		    </menus>
 		    <additional_menu>
@@ -169,7 +240,7 @@
 					</menu_item>
 
 					
-				</additional_menu>
+			</additional_menu>
 
 			<sidebar>
 				<sidebar_item>
@@ -186,152 +257,7 @@
 			</default_page>
 			
 		</user>
-		<user>
-			<user_type>companyHR</user_type>
-			<layout_name></layout_name>
-		    <header_name></header_name>
-		    <footer_name></footer_name>
-		    <logo_name></logo_name>
-
-
-		    <menus>
-				<menu_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</menu_item>				
-		    </menus>
-
-
-			<sidebar>
-				<sidebar_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</sidebar_item>
-			</sidebar>
-
-		</user>
-		<user>
-			<user_type>companyManager</user_type>
-			<layout_name></layout_name>
-		    <header_name></header_name>
-		    <footer_name></footer_name>
-		    <logo_name></logo_name>
-
-
-		    <menus>
-				<menu_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</menu_item>				
-		    </menus>
-
-
-			<sidebar>
-				<sidebar_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</sidebar_item>
-			</sidebar>
-
-		</user>
-		<user>
-			<user_type>companyWorker</user_type>
-			<layout_name></layout_name>
-		    <header_name></header_name>
-		    <footer_name></footer_name>
-		    <logo_name></logo_name>
-
-
-		    <menus>
-				<menu_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</menu_item>				
-		    </menus>
-
-
-			<sidebar>
-				<sidebar_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</sidebar_item>
-			</sidebar>
-
-		</user>
-		<user>
-			<user_type>SMAadmin</user_type>
-			<layout_name></layout_name>
-		    <header_name></header_name>
-		    <footer_name></footer_name>
-		    <logo_name></logo_name>
-
-
-		    <menus>
-				<menu_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</menu_item>				
-		    </menus>
-
-
-			<sidebar>
-				<sidebar_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</sidebar_item>
-			</sidebar>
-
-		</user>
-		<user>
-			<user_type>SMAmanager</user_type>
-			
-
-		    <menus>
-				<menu_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</menu_item>				
-		    </menus>
-
-
-			<sidebar>
-				<sidebar_item>
-					<screen_name></screen_name>
-					<screen_page>
-						<page_title></page_title>
-						<page_view_name></page_view_name>
-					</screen_page>
-				</sidebar_item>
-			</sidebar>
-
-		</user>
-
+		
+		
 	</user_specific>
 </SMA>

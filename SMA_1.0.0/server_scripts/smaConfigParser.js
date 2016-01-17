@@ -89,6 +89,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 									
 								}
 
+
 								//console.dir(languageObjectJSON);
 								if(languageObjectJSON!=undefined){
 									//______________LANGUAGES____________________
@@ -229,7 +230,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 			  //callback0();
 			//console.log(val);
 			
-
+ 
 		},function(err){
 			//console.log('called back');
 			call2();
@@ -241,11 +242,17 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 					for(var menu_item in menusObjectJSON[0]['menu_item']){
 						//smaLocals.menuItems.push(smaLocals.configInJSON.SMA.menus[0]['menu_item'][menu_item]);
 						initPanelItems(menusObjectJSON[0]['menu_item'][menu_item],function(panelItemsObject){
-							
+								console.log('-_-_-_-_-_-_-_-_-_-_-')
+								console.dir(menusObjectJSON[0]['menu_item'][menu_item])
+								//if(menusObjectJSON[0]['menu_item'][menu_item].default_list_dataset[0])
+								var defaultDataSetSQL=menusObjectJSON[0]['menu_item'][menu_item].default_list_dataset[0].data_query;
+
+
 								menusObject.push(new sma.menuItem(menusObjectJSON[0]['menu_item'][menu_item].screen_name,
 																  menusObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_title,
 																  menusObjectJSON[0]['menu_item'][menu_item].screen_page[0].page_view_name,
-																  panelItemsObject
+																  panelItemsObject,defaultDataSetSQL
+																  
 											));
 						});
 
@@ -278,7 +285,7 @@ var   configReader=function(sma,app,smaLocals,fs,dbConnector,xmlObject,utf8){
 		else{
 			callback2();
 		}
-		
+	
 	}
 
 
